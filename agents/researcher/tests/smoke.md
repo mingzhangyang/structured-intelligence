@@ -16,6 +16,8 @@ Input topic: "What are the most plausible near-term bottlenecks in autonomous so
 - Output includes a `Source Table` that resolves citation tokens to concrete sources.
 - Output includes a `Self-Audit` section.
 - If self-audit contains any `YES`, output includes explicit revision notes.
+- If retrieval is insufficient, output is marked `Preliminary` and includes `Follow-up Queries`.
+- If disagreement impacts more than 30 percent of major claims, output includes `Conflict Map`.
 - Uncertainty and missing-data limitations are explicitly stated.
 
 ## Run

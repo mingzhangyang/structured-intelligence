@@ -118,6 +118,16 @@ def validate(text: str) -> list[str]:
         if not re.search(r"(?i)falsification condition\s*:", block):
             errors.append(f"Hypothesis {idx}: missing 'Falsification condition:'.")
 
+        confidence_match = re.search(r"(?i)confidence estimate\s*:\s*([0-9]*\.?[0-9]+)", block)
+        if not confidence_match:
+            errors.append(f"Hypothesis {idx}: missing 'Confidence estimate:' in [0,1].")
+        else:
+            confidence = float(confidence_match.group(1))
+            if confidence < 0.0 or confidence > 1.0:
+                errors.append(
+                    f"Hypothesis {idx}: confidence estimate out of range [0,1] ({confidence})."
+                )
+
         classification_match = re.search(
             r"(?i)classification\s*:\s*(Refinement|Extension|Candidate Paradigm Shift)",
             block,
@@ -145,6 +155,23 @@ def validate(text: str) -> list[str]:
     if candidate_count == 0:
         # No failure here; smoke rule is conditional.
         pass
+
+    # Retrieval fallback gate.
+    if re.search(r"(?im)^\s*preliminary\s*$", text) or re.search(r"(?i)\bpreliminary\b", text):
+        if not re.search(r"(?im)^#{1,6}\s+Follow-up Queries\s*$", text):
+            errors.append(
+                "Output marked Preliminary but missing required 'Follow-up Queries' section."
+            )
+
+    # Conflict gate mention.
+    if re.search(r"(?i)\b(3[0-9]|[4-9][0-9]|100)\s*%|\b0\.3[0-9]*\b", text):
+        if (
+            "conflict" in text.lower()
+            and not re.search(r"(?im)^#{1,6}\s+Conflict Map\s*$", text)
+        ):
+            errors.append(
+                "Conflict appears significant but missing 'Conflict Map' section."
+            )
 
     # Citation and source table resolution.
     source_table = get_section_text(text, headings, "Source Table")

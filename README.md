@@ -14,6 +14,25 @@ A repository for production-ready AI assets that improve coding, research, and w
 
 ## Quick Start
 
+### Use The `researcher` Skill
+
+After cloning this repository:
+
+```bash
+# Default target: Codex (~/.codex/skills)
+./scripts/install_skill.sh researcher
+
+# Claude Code (~/.claude/skills)
+./scripts/install_skill.sh researcher --tool claude
+
+# Other tools (custom skills directory)
+./scripts/install_skill.sh researcher --dest ~/.my-tool/skills
+```
+
+Then restart your tool session and ask for `researcher`.
+
+### Build This Repository
+
 1. Add an agent from `agents/_templates/agent`.
 2. Add a skill from `skills/_templates/skill`.
 3. Register both in their `registry.yaml` files.

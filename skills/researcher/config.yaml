@@ -1,0 +1,14 @@
+id: researcher
+name: Researcher
+version: 2.1.0
+owner: mingzhang
+description: Rigorous research workflow with falsifiable hypotheses, source traceability, and explicit uncertainty.
+entrypoints:
+  - SKILL.md
+default_tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
+  - Fetch
+  - WebSearch

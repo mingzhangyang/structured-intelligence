@@ -1,4 +1,9 @@
 skills:
+  - id: researcher
+    name: Researcher
+    version: 2.1.0
+    path: skills/researcher
+    config: skills/researcher/config.yaml
   - id: source-summarizer
     name: Source Summarizer
     version: 0.1.0
