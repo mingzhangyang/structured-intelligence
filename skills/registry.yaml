@@ -1,7 +1,7 @@
 skills:
   - id: research
     name: Research
-    version: 2.1.0
+    version: 2.2.0
     path: skills/research
     config: skills/research/config.yaml
   - id: source-summarizer

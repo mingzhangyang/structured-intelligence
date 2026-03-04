@@ -1,8 +1,8 @@
 id: research
 name: Research
-version: 2.1.0
+version: 2.2.0
 owner: mingzhang
-description: Rigorous research workflow with falsifiable hypotheses, source traceability, and explicit uncertainty.
+description: Rigorous research workflow with first-principles reasoning, adversarial review, prediction calibration, reproducibility, and memory writeback.
 entrypoints:
   - SKILL.md
 default_tools:

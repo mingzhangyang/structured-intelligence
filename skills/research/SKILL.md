@@ -1,6 +1,6 @@
 ---
 name: research
-description: "Rigorous research capability for structured synthesis, falsifiable hypotheses, evidence traceability, and explicit uncertainty reporting."
+description: "Rigorous research workflow for deep synthesis, first-principles reasoning, cross-domain transfer, adversarial review, prediction calibration, reproducibility, and research_vault memory writeback."
 ---
 
 # Skill: Research
@@ -10,8 +10,10 @@ description: "Rigorous research capability for structured synthesis, falsifiable
 Use this skill for deep research tasks that require:
 - structured problem framing
 - state-of-the-art mapping
+- historical evolution and future direction mapping
 - falsifiable hypothesis generation
 - explicit uncertainty and evidence attribution
+- adversarial challenge and replication planning
 
 ## Required Workflow
 
@@ -33,6 +35,11 @@ Append:
 - Source Table
 - Uncertainties
 - Self-Audit
+- Priority Matrix
+- Predictions and Calibration Plan
+- Adversarial Review
+- Replication Pack
+- Vault Writeback Log
 
 ## Install
 
