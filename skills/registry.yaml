@@ -4,6 +4,11 @@ skills:
     version: 2.2.0
     path: skills/research
     config: skills/research/config.yaml
+  - id: design-thermostable-mutations
+    name: Design Thermostable Mutations
+    version: 1.1.0
+    path: skills/design-thermostable-mutations
+    config: skills/design-thermostable-mutations/config.yaml
   - id: source-summarizer
     name: Source Summarizer
     version: 0.1.0

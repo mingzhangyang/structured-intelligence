@@ -29,6 +29,12 @@ SKILL_CONFIG_REQUIRED_KEYS = (
     "entrypoints",
     "default_tools",
 )
+PROVIDER_REQUIRED_FILENAMES = ("openai.yaml", "claude.yaml")
+PROVIDER_INTERFACE_REQUIRED_KEYS = (
+    "display_name",
+    "short_description",
+    "default_prompt",
+)
 
 KEBAB_CASE_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 SEMVER_RE = re.compile(
@@ -119,6 +125,50 @@ def validate_common_config_types(
         for i, skill_id in enumerate(default_items):
             if is_non_empty_string(skill_id) and not KEBAB_CASE_RE.match(skill_id):
                 errors.append(f"{label}: 'default_skills[{i}]' must be kebab-case")
+
+
+def validate_provider_interface_file(path: Path, errors: list[str]) -> None:
+    data = load_yaml(path, errors)
+    if data is None:
+        return
+    if not isinstance(data, dict):
+        errors.append(f"{path}: expected mapping root")
+        return
+
+    interface = data.get("interface")
+    if not isinstance(interface, dict):
+        errors.append(f"{path}: missing required mapping 'interface'")
+        return
+
+    for key in PROVIDER_INTERFACE_REQUIRED_KEYS:
+        value = interface.get(key)
+        if not is_non_empty_string(value):
+            errors.append(f"{path}: 'interface.{key}' must be a non-empty string")
+
+
+def validate_skill_provider_metadata(skill_dir: Path, entry_label: str, errors: list[str]) -> None:
+    agents_dir = skill_dir / "agents"
+    if not agents_dir.exists() or not agents_dir.is_dir():
+        errors.append(f"{entry_label}: missing provider metadata directory: {agents_dir.relative_to(ROOT)}")
+        return
+
+    for filename in PROVIDER_REQUIRED_FILENAMES:
+        required_path = agents_dir / filename
+        if not required_path.exists() or not required_path.is_file():
+            errors.append(
+                f"{entry_label}: missing required provider metadata file: {required_path.relative_to(ROOT)}"
+            )
+
+    provider_files = sorted(
+        {p.resolve(): p for p in list(agents_dir.glob("*.yaml")) + list(agents_dir.glob("*.yml"))}.values(),
+        key=lambda p: p.name,
+    )
+    if not provider_files:
+        errors.append(f"{entry_label}: no provider metadata files found under {agents_dir.relative_to(ROOT)}")
+        return
+
+    for provider_file in provider_files:
+        validate_provider_interface_file(provider_file, errors)
 
 
 def validate_registry(
@@ -216,6 +266,8 @@ def validate_registry(
 
         if root_key == "skills" and "SKILL.md" not in cfg["entrypoints"]:
             errors.append(f"{config_path}: 'entrypoints' should include 'SKILL.md'")
+        if root_key == "skills":
+            validate_skill_provider_metadata(entry_path, entry_label, errors)
         if root_key == "agents":
             agent_doc = entry_path / "AGENT.md"
             if not agent_doc.exists() or not agent_doc.is_file():

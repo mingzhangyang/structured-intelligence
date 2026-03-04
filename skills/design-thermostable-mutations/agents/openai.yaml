@@ -1,0 +1,4 @@
+interface:
+  display_name: "Thermostable Mutation Design"
+  short_description: "Decision-grade thermostability mutation design with default bioactivity guardrails."
+  default_prompt: "Use $design-thermostable-mutations to design thermostability mutations while preserving bioactivity by default."

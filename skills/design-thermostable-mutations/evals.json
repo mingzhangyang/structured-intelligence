@@ -1,0 +1,113 @@
+[
+  {
+    "name": "single-site-catalytic-context",
+    "prompt": "I'm working on TEM-1 beta-lactamase (PDB: 1BTL). I want to mutate His257 to Ala to test catalytic role. Predict stability impact with at least two methods and summarize risks.",
+    "files": [],
+    "expectations": [
+      "Retrieves or validates an appropriate structure source",
+      "Checks structural context around the target residue",
+      "Uses at least two complementary stability methods",
+      "Reports stability metrics with sign convention clarity",
+      "Provides a consensus-style ranking or confidence statement",
+      "Flags catalytic-function risk and recommends wet-lab validation"
+    ]
+  },
+  {
+    "name": "thermostability-site-prioritization",
+    "prompt": "Design stabilizing mutations for lysozyme. Prioritize surface and loop candidates, avoid active-site disruption, and propose a practical screening plan.",
+    "files": [],
+    "expectations": [
+      "Defines mutation-space constraints before proposing variants",
+      "Uses structure-aware rationale for each suggested site",
+      "Explains combinatorial limits to avoid search explosion",
+      "Returns ranked candidates with evidence provenance",
+      "Includes explicit assumptions and functional risk flags"
+    ]
+  },
+  {
+    "name": "sequence-only-track",
+    "prompt": "I only have FASTA for my enzyme. Design a stability-oriented mutation workflow using AlphaFold-assisted steps and explain what cannot be inferred directly from pLDDT.",
+    "files": [],
+    "expectations": [
+      "Chooses the sequence/AI-assisted track when structure is missing",
+      "States that pLDDT is not a direct stability metric",
+      "Describes downstream DDG or learned predictors for ranking",
+      "Provides a reproducible batch-oriented workflow"
+    ]
+  },
+  {
+    "name": "numbering-mismatch-guardrail",
+    "prompt": "My FASTA numbering does not match the PDB chain numbering. I need to run FoldX on A123V, L200I from sequence coordinates. Give a safe mapping-first workflow.",
+    "files": [],
+    "expectations": [
+      "Detects numbering mismatch risk and calls for explicit mapping",
+      "Uses mapping outputs before structure-based scoring",
+      "Prevents direct scoring on potentially mis-mapped positions",
+      "Documents chain/numbering assumptions in the report"
+    ]
+  },
+  {
+    "name": "consensus-ranking-directionality",
+    "prompt": "Combine FoldX DDG, Rosetta DDG, and a stability probability score into one ranked table. Ensure metric directionality is handled correctly.",
+    "files": [],
+    "expectations": [
+      "Aggregates metrics with explicit normalization",
+      "Handles mixed metric directions correctly",
+      "Reports support count or support fraction across methods",
+      "Outputs a final ranked candidate list suitable for triage"
+    ]
+  },
+  {
+    "name": "saturation-library-at-single-site",
+    "prompt": "Create a saturation mutagenesis plan for site 152 of a protease and prioritize the 19 alternatives by predicted stability for first-round testing.",
+    "files": [],
+    "expectations": [
+      "Represents all 19 non-WT substitutions at one site",
+      "Uses a fast first-pass scoring strategy with caveats",
+      "Returns a prioritized shortlist and uncertainty notes",
+      "Recommends orthogonal re-scoring or validation for top hits"
+    ]
+  },
+  {
+    "name": "interface-engineering-guardrail",
+    "prompt": "I want to stabilize a homodimer enzyme by mutating residues near the interface. Provide a safe computational workflow and ranking strategy.",
+    "files": [],
+    "expectations": [
+      "Locks biological assembly assumptions and interface context",
+      "Uses an interface-focused predictor in addition to monomer stability tools",
+      "Includes interface-aware scoring and functional risk flags",
+      "Provides orthogonal re-scoring or validation for top interface variants"
+    ]
+  },
+  {
+    "name": "stabilizing-bias-awareness",
+    "prompt": "My model predicts many strongly stabilizing mutations. Give a triage plan that avoids overconfidence and explains known benchmark bias.",
+    "files": [],
+    "expectations": [
+      "Explicitly describes destabilizing-class bias and uncertainty for stabilizing calls",
+      "Treats stabilizing predictions as tentative until orthogonally checked",
+      "Uses support fraction or confidence framing in the final shortlist"
+    ]
+  },
+  {
+    "name": "thermostability-objective-specific-ranking",
+    "prompt": "I only care about thermostability at 60 C. Build an objective-specific ranking workflow and state how you will calibrate score thresholds.",
+    "files": [],
+    "expectations": [
+      "Uses objective-specific tool choice for thermostability rather than generic stability ranking",
+      "Includes a temperature-oriented signal in addition to DDG-style evidence",
+      "Defines a calibration panel with known stabilizing/neutral/destabilizing references"
+    ]
+  },
+  {
+    "name": "candidate-site-discovery-before-library",
+    "prompt": "Before proposing mutations, find and rank candidate mutation sites for my enzyme from FASTA+PDB, avoid catalytic/cofactor/disulfide residues, and output site specs for library generation.",
+    "files": [],
+    "expectations": [
+      "Performs candidate-site discovery before mutation-library enumeration",
+      "Uses structural context including active-shell distance and exposure or flexibility",
+      "Applies blocklist guardrails for catalytic or cofactor or disulfide positions",
+      "Outputs ranked site candidates with rationale and site specs for downstream generation"
+    ]
+  }
+]

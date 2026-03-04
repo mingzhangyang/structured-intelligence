@@ -1,0 +1,4 @@
+interface:
+  display_name: "Research"
+  short_description: "Rigorous research workflow with first-principles reasoning and evidence traceability."
+  default_prompt: "Use research to run a decision-grade research workflow with explicit uncertainty and evidence tracking."

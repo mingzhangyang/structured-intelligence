@@ -8,6 +8,7 @@ Each skill should contain:
 
 - `config.yaml`: metadata and runtime entrypoint contract.
 - `SKILL.md`: execution guidance and constraints.
+- `agents/`: provider metadata adapters (`openai.yaml`, `claude.yaml`, and optional others).
 - `scripts/`: utilities used by the skill.
 - `references/`: optional targeted references.
 - `assets/`: reusable templates or static inputs.
@@ -35,3 +36,14 @@ skills:
 - `description`
 - `entrypoints`
 - `default_tools`
+
+## Provider Metadata Standard
+
+Every skill must include:
+- `agents/openai.yaml`
+- `agents/claude.yaml`
+
+Each provider file must define:
+- `interface.display_name`
+- `interface.short_description`
+- `interface.default_prompt`

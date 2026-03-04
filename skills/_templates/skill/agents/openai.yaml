@@ -1,0 +1,4 @@
+interface:
+  display_name: "<human-friendly-name>"
+  short_description: "<one-line-description>"
+  default_prompt: "Use $<skill-id> to perform the task with this skill."

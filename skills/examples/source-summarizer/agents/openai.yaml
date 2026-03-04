@@ -1,0 +1,4 @@
+interface:
+  display_name: "Source Summarizer"
+  short_description: "Summarize source material with key points, citations, and uncertainty notes."
+  default_prompt: "Use $source-summarizer to produce a concise summary with explicit citations and uncertainties."

@@ -36,5 +36,9 @@
 
 - Every agent should include a smoke test in `tests/`.
 - Every skill should document inputs, outputs, and failure modes in `SKILL.md`.
+- Every skill should include provider adapter metadata under `agents/`:
+  - `openai.yaml`
+  - `claude.yaml`
+  - each file must define `interface.display_name`, `interface.short_description`, and `interface.default_prompt`
 - Add new entries to `registry.yaml` files when introducing assets.
 - Run `./scripts/validate_structure.sh` to enforce structure and registry schema checks.
