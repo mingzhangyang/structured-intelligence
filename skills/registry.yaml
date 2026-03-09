@@ -14,3 +14,8 @@ skills:
     version: 0.1.0
     path: skills/examples/source-summarizer
     config: skills/examples/source-summarizer/config.yaml
+  - id: structured-intelligence-skill-creator
+    name: Structured Intelligence Skill Creator
+    version: 0.1.0
+    path: skills/structured-intelligence-skill-creator
+    config: skills/structured-intelligence-skill-creator/config.yaml

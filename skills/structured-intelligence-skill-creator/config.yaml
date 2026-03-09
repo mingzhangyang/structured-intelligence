@@ -1,0 +1,12 @@
+id: structured-intelligence-skill-creator
+name: Structured Intelligence Skill Creator
+version: 0.1.0
+owner: mingzhang
+description: Create or update skills that match this repository's template, registry, provider metadata, and validation workflow.
+entrypoints:
+  - SKILL.md
+default_tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash

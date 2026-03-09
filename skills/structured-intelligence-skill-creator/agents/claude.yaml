@@ -1,0 +1,4 @@
+interface:
+  display_name: "Structured Intelligence Skill Creator"
+  short_description: "Create or update skills that conform to this repository's template, registry, provider metadata, and validation workflow."
+  default_prompt: "Use structured-intelligence-skill-creator to create or update a skill for this repository, including registry registration and provider metadata."
