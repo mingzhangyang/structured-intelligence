@@ -15,7 +15,16 @@ Use this skill for deep research tasks that require:
 - explicit uncertainty and evidence attribution
 - adversarial challenge and replication planning
 
-## Required Workflow
+## Inputs
+
+- Required:
+  - research question, decision, or hypothesis to investigate
+  - enough context to define scope, audience, and constraints
+- Optional:
+  - seed sources, prior notes, or local `research_vault/` material
+  - target output format, deadline, or calibration horizon
+
+## Workflow
 
 1. Follow the full protocol in `references/research_protocol.md`.
 2. Treat `references/system_prompt.md` as behavioral constraints.
@@ -55,3 +64,12 @@ From repository root:
 # Other tools
 ./scripts/install_skill.sh research --dest ~/.my-tool/skills
 ```
+
+## Limits
+
+- This skill is designed for rigorous synthesis, not instant answers.
+- Output quality depends on source quality, scope clarity, and available evidence.
+- Common failure cases:
+  - weak or missing primary sources
+  - underspecified scope or success criteria
+  - missing filesystem access for real vault writeback

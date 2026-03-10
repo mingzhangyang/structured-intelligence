@@ -321,19 +321,19 @@ def build_mapping(
         if has_chain:
             aligned_pairs += 1
             residue = residues[chain_idx - 1]
-            row.update(
-                {
-                    "mapped": True,
-                    "structure_aa": b,
-                    "chain": residue["chain"],
-                    "resnum": residue["resnum"],
-                    "icode": residue["icode"],
-                    "residue_id": residue["residue_id"],
-                }
-            )
-            mapped_count += 1
+            row["structure_aa"] = b
             if a == b:
+                row.update(
+                    {
+                        "mapped": True,
+                        "chain": residue["chain"],
+                        "resnum": residue["resnum"],
+                        "icode": residue["icode"],
+                        "residue_id": residue["residue_id"],
+                    }
+                )
                 matches += 1
+                mapped_count += 1
         mapping_rows.append(row)
 
     identity = (matches / aligned_pairs) if aligned_pairs else 0.0

@@ -35,6 +35,13 @@ PROVIDER_INTERFACE_REQUIRED_KEYS = (
     "short_description",
     "default_prompt",
 )
+REQUIRED_SKILL_DOC_HEADINGS = (
+    "Use When",
+    "Inputs",
+    "Workflow",
+    "Output Contract",
+    "Limits",
+)
 
 KEBAB_CASE_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 SEMVER_RE = re.compile(
@@ -60,6 +67,14 @@ def load_yaml(path: Path, errors: list[str]) -> object | None:
     except Exception as exc:
         errors.append(f"{path}: invalid YAML ({exc})")
         return None
+
+
+def strip_fenced_code_blocks(text: str) -> str:
+    return re.sub(r"(?ms)^(```|~~~).*?^\1[ \t]*$", "", text)
+
+
+def extract_markdown_headings(text: str) -> list[str]:
+    return [match.group(1).strip() for match in re.finditer(r"(?m)^##\s+(.+?)\s*$", text)]
 
 
 def require_keys(path: Path, obj: object, required: tuple[str, ...], errors: list[str]) -> bool:
@@ -171,6 +186,27 @@ def validate_skill_provider_metadata(skill_dir: Path, entry_label: str, errors: 
         validate_provider_interface_file(provider_file, errors)
 
 
+def validate_skill_documentation(skill_dir: Path, entry_label: str, errors: list[str]) -> None:
+    skill_md = skill_dir / "SKILL.md"
+    if not skill_md.exists() or not skill_md.is_file():
+        errors.append(f"{entry_label}: missing required file: {skill_md.relative_to(ROOT)}")
+        return
+
+    text = strip_fenced_code_blocks(skill_md.read_text(encoding="utf-8"))
+    headings = {heading.casefold() for heading in extract_markdown_headings(text)}
+    for heading in REQUIRED_SKILL_DOC_HEADINGS:
+        if heading.casefold() not in headings:
+            errors.append(f"{entry_label}: SKILL.md missing required section heading '{heading}'")
+
+    if "limits" in headings:
+        limits_match = re.search(r"(?ms)^##\s+Limits\s*$([\s\S]*?)(?=^##\s+|\Z)", text)
+        limits_text = limits_match.group(1) if limits_match else ""
+        if "failure" not in limits_text.casefold():
+            errors.append(
+                f"{entry_label}: SKILL.md 'Limits' section should document failure modes or common failure cases"
+            )
+
+
 def validate_registry(
     registry_path: Path,
     root_key: str,
@@ -229,6 +265,25 @@ def validate_registry(
         if len(errors) > entry_errors_start:
             continue
 
+        path_parts = Path(entry["path"]).parts
+        if root_key == "skills":
+            if len(path_parts) != 2 or path_parts[0] != "skills" or path_parts[1] != entry["id"]:
+                errors.append(
+                    f"{entry_label}: 'path' must be 'skills/{entry['id']}' for registered skills"
+                )
+            if entry["config"] != f"skills/{entry['id']}/config.yaml":
+                errors.append(
+                    f"{entry_label}: 'config' must be 'skills/{entry['id']}/config.yaml' for registered skills"
+                )
+        if root_key == "agents":
+            if len(path_parts) != 2 or path_parts[0] != "agents" or path_parts[1] != entry["id"]:
+                errors.append(
+                    f"{entry_label}: 'path' must be 'agents/{entry['id']}' for registered agents"
+                )
+
+        if len(errors) > entry_errors_start:
+            continue
+
         entry_path = ROOT / entry["path"]
         config_path = ROOT / entry["config"]
 
@@ -267,6 +322,7 @@ def validate_registry(
         if root_key == "skills" and "SKILL.md" not in cfg["entrypoints"]:
             errors.append(f"{config_path}: 'entrypoints' should include 'SKILL.md'")
         if root_key == "skills":
+            validate_skill_documentation(entry_path, entry_label, errors)
             validate_skill_provider_metadata(entry_path, entry_label, errors)
         if root_key == "agents":
             agent_doc = entry_path / "AGENT.md"

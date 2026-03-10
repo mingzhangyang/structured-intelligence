@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+
 required_paths=(
   "agents/registry.yaml"
   "skills/registry.yaml"
@@ -13,7 +15,7 @@ required_paths=(
 
 missing=0
 for p in "${required_paths[@]}"; do
-  if [[ ! -e "$p" ]]; then
+  if [[ ! -e "$ROOT_DIR/$p" ]]; then
     echo "Missing: $p"
     missing=1
   fi
@@ -24,6 +26,6 @@ if [[ "$missing" -ne 0 ]]; then
   exit 1
 fi
 
-python3 scripts/validate_registry_schema.py
+python3 "$ROOT_DIR/scripts/validate_registry_schema.py"
 
 echo "Structure validation passed"

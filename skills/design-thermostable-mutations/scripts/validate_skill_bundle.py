@@ -21,9 +21,18 @@ import re
 import sys
 from pathlib import Path
 
+import yaml
+
 
 PATH_REF_RE = re.compile(r"`((?:scripts|references)/[^`]+)`")
 REQUIRED_PROVIDER_FILES = ("openai.yaml", "claude.yaml")
+REQUIRED_SKILL_DOC_HEADINGS = (
+    "Use When",
+    "Inputs",
+    "Workflow",
+    "Output Contract",
+    "Limits",
+)
 
 
 def parse_frontmatter(text: str) -> dict[str, str]:
@@ -46,10 +55,18 @@ def parse_frontmatter(text: str) -> dict[str, str]:
     return payload
 
 
+def strip_fenced_code_blocks(text: str) -> str:
+    return re.sub(r"(?ms)^(```|~~~).*?^\1[ \t]*$", "", text)
+
+
+def extract_markdown_headings(text: str) -> list[str]:
+    return [match.group(1).strip() for match in re.finditer(r"(?m)^##\s+(.+?)\s*$", text)]
+
+
 def validate_evals_schema(path: Path) -> list[str]:
     errors: list[str] = []
     if not path.exists():
-        return [f"Missing file: {path}"]
+        return []
     try:
         payload = json.loads(path.read_text())
     except json.JSONDecodeError as exc:
@@ -78,11 +95,19 @@ def validate_evals_schema(path: Path) -> list[str]:
 
 def validate_provider_yaml(path: Path) -> list[str]:
     errors: list[str] = []
-    text = path.read_text()
-    required = ["interface:", "display_name:", "short_description:", "default_prompt:"]
-    for token in required:
-        if token not in text:
-            errors.append(f"{path} missing required token '{token}'")
+    try:
+        payload = yaml.safe_load(path.read_text(encoding="utf-8"))
+    except Exception as exc:  # noqa: BLE001
+        return [f"{path} invalid YAML ({exc})"]
+    if not isinstance(payload, dict):
+        return [f"{path} must contain a mapping root"]
+    interface = payload.get("interface")
+    if not isinstance(interface, dict):
+        return [f"{path} missing required mapping 'interface'"]
+    for key in ("display_name", "short_description", "default_prompt"):
+        value = interface.get(key)
+        if not isinstance(value, str) or not value.strip():
+            errors.append(f"{path} 'interface.{key}' must be a non-empty string")
     return errors
 
 
@@ -133,17 +158,30 @@ def main() -> None:
     if not skill_md.exists():
         errors.append(f"Missing file: {skill_md}")
     else:
-        text = skill_md.read_text()
+        text = skill_md.read_text(encoding="utf-8")
         line_count = len(text.splitlines())
         if line_count > args.max_skill_lines:
             warnings.append(
                 f"{skill_md} has {line_count} lines (guideline <= {args.max_skill_lines})."
             )
 
+        content = strip_fenced_code_blocks(text)
+        headings = {heading.casefold() for heading in extract_markdown_headings(content)}
+        for heading in REQUIRED_SKILL_DOC_HEADINGS:
+            if heading.casefold() not in headings:
+                errors.append(f"SKILL.md missing required section heading '{heading}'.")
+
+        limits_match = re.search(r"(?ms)^##\s+Limits\s*$([\s\S]*?)(?=^##\s+|\Z)", content)
+        limits_text = limits_match.group(1) if limits_match else ""
+        if limits_text and "failure" not in limits_text.casefold():
+            errors.append(
+                "SKILL.md 'Limits' section should document failure modes or common failure cases."
+            )
+
         fm = parse_frontmatter(text)
-        if not fm.get("name"):
+        if fm and not fm.get("name"):
             errors.append("SKILL.md frontmatter missing 'name'.")
-        if not fm.get("description"):
+        if fm and not fm.get("description"):
             errors.append("SKILL.md frontmatter missing 'description'.")
 
         refs = sorted(set(PATH_REF_RE.findall(text)))

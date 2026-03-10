@@ -144,3 +144,7 @@ From repository root:
 - Heuristic scores are triage evidence, not biochemical truth.
 - Predictions must be experimentally validated (Tm/T50/activity).
 - If functional constraints are incomplete, activity-preservation confidence drops.
+- Common failure cases:
+  - structure numbering mismatches that are not validated before scoring
+  - incomplete active-site/cofactor/disulfide/blocklist constraints
+  - overlarge mutation libraries that exceed practical scoring budgets

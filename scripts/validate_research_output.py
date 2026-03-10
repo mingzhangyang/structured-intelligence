@@ -27,6 +27,10 @@ APPENDIX_SECTIONS = [
 ]
 
 
+def strip_fenced_code_blocks(text: str) -> str:
+    return re.sub(r"(?ms)^(```|~~~).*?^\1[ \t]*$", "", text)
+
+
 def extract_headings(text: str) -> list[tuple[int, str]]:
     headings: list[tuple[int, str]] = []
     for match in re.finditer(r"(?m)^(#{1,6})\s+(.+?)\s*$", text):
@@ -54,8 +58,9 @@ def section_bounds(headings: list[tuple[int, str]], text_len: int, title: str) -
 
 def validate(text: str) -> list[str]:
     errors: list[str] = []
-    headings = extract_headings(text)
-    text_len = len(text)
+    content = strip_fenced_code_blocks(text)
+    headings = extract_headings(content)
+    text_len = len(content)
 
     for title in CORE_SECTIONS + APPENDIX_SECTIONS:
         if find_heading_index(headings, title) is None:
@@ -74,8 +79,8 @@ def validate(text: str) -> list[str]:
     source_bounds = section_bounds(headings, text_len, "Source Table")
     if source_bounds is None:
         return errors
-    source_text = text[source_bounds[0] : source_bounds[1]]
-    cited_tokens = set(re.findall(r"\[S\d+\]", text))
+    source_text = content[source_bounds[0] : source_bounds[1]]
+    cited_tokens = set(re.findall(r"\[S\d+\]", content))
     source_tokens = set(re.findall(r"\[S\d+\]", source_text))
     unresolved = sorted(cited_tokens - source_tokens)
     if unresolved:
@@ -86,7 +91,7 @@ def validate(text: str) -> list[str]:
 
     replication_bounds = section_bounds(headings, text_len, "Replication Pack")
     if replication_bounds is not None:
-        replication_text = text[replication_bounds[0] : replication_bounds[1]]
+        replication_text = content[replication_bounds[0] : replication_bounds[1]]
         required_keywords = ("procedure", "pass/fail", "input", "output")
         missing_keywords = [
             keyword for keyword in required_keywords if keyword.lower() not in replication_text.lower()
@@ -99,7 +104,7 @@ def validate(text: str) -> list[str]:
 
     prediction_bounds = section_bounds(headings, text_len, "Predictions and Calibration Plan")
     if prediction_bounds is not None:
-        prediction_text = text[prediction_bounds[0] : prediction_bounds[1]]
+        prediction_text = content[prediction_bounds[0] : prediction_bounds[1]]
         has_date = bool(re.search(r"\b\d{4}-\d{2}-\d{2}\b", prediction_text))
         if not has_date:
             errors.append(
@@ -108,7 +113,7 @@ def validate(text: str) -> list[str]:
 
     vault_bounds = section_bounds(headings, text_len, "Vault Writeback Log")
     if vault_bounds is not None:
-        vault_text = text[vault_bounds[0] : vault_bounds[1]]
+        vault_text = content[vault_bounds[0] : vault_bounds[1]]
         if "research_vault/" not in vault_text:
             errors.append(
                 "Section 'Vault Writeback Log' should include a `research_vault/` path."

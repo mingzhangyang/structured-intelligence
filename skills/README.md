@@ -15,6 +15,8 @@ Each skill should contain:
 
 Use `skills/_templates/skill` as the starting point.
 
+Example or reference-only bundles may live under `skills/examples/`, but they should not be added to `skills/registry.yaml` unless they satisfy the same quality gates as production skills.
+
 ## Registry Schema
 
 `skills/registry.yaml` uses this shape:

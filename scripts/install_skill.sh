@@ -149,6 +149,11 @@ if [[ -z "$REL_PATH" ]]; then
   exit 1
 fi
 
+if [[ "$REL_PATH" = /* || "$REL_PATH" == *".."* || "$REL_PATH" != skills/* ]]; then
+  echo "Skill '$SKILL_ID' resolved to unsafe registry path: $REL_PATH"
+  exit 1
+fi
+
 SOURCE_DIR="$ROOT_DIR/$REL_PATH"
 if [[ ! -d "$SOURCE_DIR" ]]; then
   echo "Registered skill path does not exist: $SOURCE_DIR"
