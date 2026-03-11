@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Structured Intelligence Social Preview</title>
+    <style>
+      :root {
+        --bg: #f6eedf;
+        --paper: rgba(255, 251, 245, 0.84);
+        --paper-strong: rgba(255, 251, 245, 0.96);
+        --ink: #1b2a2f;
+        --muted: #5b686d;
+        --gold: #be7c24;
+        --teal: #1b7668;
+        --line: rgba(27, 42, 47, 0.08);
+        --shadow: 0 28px 80px rgba(48, 40, 20, 0.14);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        width: 1200px;
+        height: 630px;
+        overflow: hidden;
+        font-family: "Avenir Next", "Segoe UI", "Helvetica Neue", sans-serif;
+        background:
+          radial-gradient(circle at 15% 12%, rgba(190, 124, 36, 0.22), transparent 24%),
+          radial-gradient(circle at 82% 18%, rgba(27, 118, 104, 0.18), transparent 26%),
+          linear-gradient(135deg, #f7f0e4 0%, #efe5d6 55%, #ece3d7 100%);
+        color: var(--ink);
+      }
+
+      body {
+        position: relative;
+      }
+
+      .halo-a,
+      .halo-b {
+        position: absolute;
+        filter: blur(22px);
+        pointer-events: none;
+      }
+
+      .halo-a {
+        top: 56px;
+        right: 120px;
+        width: 240px;
+        height: 240px;
+        border-radius: 50%;
+        background: rgba(27, 118, 104, 0.16);
+      }
+
+      .halo-b {
+        left: -30px;
+        bottom: 30px;
+        width: 320px;
+        height: 200px;
+        border-radius: 50%;
+        background: rgba(190, 124, 36, 0.16);
+      }
+
+      .frame {
+        position: relative;
+        display: grid;
+        grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+        gap: 28px;
+        width: 100%;
+        height: 100%;
+        padding: 42px;
+      }
+
+      .main-panel,
+      .side-panel {
+        position: relative;
+        z-index: 1;
+        border: 1px solid rgba(255, 255, 255, 0.56);
+        border-radius: 34px;
+        background: var(--paper);
+        backdrop-filter: blur(10px);
+        box-shadow: var(--shadow);
+      }
+
+      .main-panel {
+        display: grid;
+        align-content: space-between;
+        padding: 34px;
+      }
+
+      .topline {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .topline img {
+        width: 64px;
+        height: 64px;
+        border-radius: 18px;
+        box-shadow: 0 16px 32px rgba(27, 118, 104, 0.18);
+      }
+
+      .brand-meta {
+        display: grid;
+        gap: 6px;
+      }
+
+      .brand-meta strong {
+        font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+        font-size: 1.35rem;
+        letter-spacing: -0.02em;
+      }
+
+      .eyebrow {
+        color: var(--teal);
+        font-size: 0.78rem;
+        font-weight: 800;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        max-width: 11ch;
+        margin: 18px 0 0;
+        font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+        font-size: 4.7rem;
+        line-height: 0.93;
+        letter-spacing: -0.04em;
+      }
+
+      .lede {
+        max-width: 45ch;
+        margin: 18px 0 0;
+        color: var(--muted);
+        font-size: 1.12rem;
+        line-height: 1.68;
+      }
+
+      .chip-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 24px;
+      }
+
+      .chip {
+        min-height: 40px;
+        padding: 0 14px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.58);
+        display: inline-flex;
+        align-items: center;
+        font-size: 0.94rem;
+        font-weight: 700;
+      }
+
+      .claim-box {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 28px;
+      }
+
+      .claim {
+        padding: 14px 16px;
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.58);
+        border: 1px solid var(--line);
+      }
+
+      .claim strong {
+        display: block;
+        font-size: 1.3rem;
+        line-height: 1;
+        margin-bottom: 8px;
+      }
+
+      .claim span {
+        color: var(--muted);
+        font-size: 0.92rem;
+        line-height: 1.45;
+      }
+
+      .footer-note {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 18px;
+        padding-top: 24px;
+        border-top: 1px solid rgba(27, 42, 47, 0.08);
+      }
+
+      .footer-note p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.96rem;
+      }
+
+      .side-panel {
+        display: grid;
+        gap: 16px;
+        padding: 20px;
+      }
+
+      .mini-card {
+        padding: 20px;
+        border-radius: 24px;
+        background: var(--paper-strong);
+        border: 1px solid var(--line);
+      }
+
+      .mini-card h2 {
+        margin: 8px 0 10px;
+        font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+        font-size: 1.78rem;
+        line-height: 1.02;
+        letter-spacing: -0.03em;
+      }
+
+      .mini-card p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.98rem;
+        line-height: 1.56;
+      }
+
+      .artifact {
+        display: inline-flex;
+        align-items: center;
+        margin-top: 14px;
+        min-height: 34px;
+        padding: 0 12px;
+        border-radius: 999px;
+        background: rgba(27, 118, 104, 0.09);
+        color: var(--ink);
+        font-size: 0.88rem;
+        font-weight: 700;
+      }
+
+      .accent {
+        background:
+          linear-gradient(135deg, rgba(190, 124, 36, 0.12), rgba(255, 255, 255, 0.96)),
+          var(--paper-strong);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="halo-a"></div>
+    <div class="halo-b"></div>
+    <main class="frame">
+      <section class="main-panel">
+        <div>
+          <div class="topline">
+            <img src="./logo.svg" alt="" />
+            <div class="brand-meta">
+              <span class="eyebrow">Skill-Based Scientific Tooling</span>
+              <strong>Structured Intelligence</strong>
+            </div>
+          </div>
+
+          <h1>Publish operational knowledge, not just results.</h1>
+          <p class="lede">
+            Reusable local AI skills for literature retrieval, scientific workflows,
+            domain annotation, and transparent scientific automation.
+          </p>
+
+          <div class="chip-row">
+            <span class="chip">PubMed workflows</span>
+            <span class="chip">RPS-BLAST orchestration</span>
+            <span class="chip">Inspectable artifacts</span>
+          </div>
+
+          <div class="claim-box">
+            <article class="claim">
+              <strong>2</strong>
+              <span>flagship skills documented with manuscripts</span>
+            </article>
+            <article class="claim">
+              <strong>Local</strong>
+              <span>filesystem-first execution for Codex and Claude Code</span>
+            </article>
+            <article class="claim">
+              <strong>Open</strong>
+              <span>GitHub Pages, MIT license, reusable workflow assets</span>
+            </article>
+          </div>
+        </div>
+
+        <div class="footer-note">
+          <p>mingzhangyang.github.io/structured-intelligence/</p>
+          <p>Language on the outside. Shared scientific method underneath.</p>
+        </div>
+      </section>
+
+      <aside class="side-panel">
+        <article class="mini-card">
+          <span class="eyebrow">Literature Monitoring</span>
+          <h2>NCBI E-utilities assistant</h2>
+          <p>
+            Weekly CRISPR briefings, structured review extraction, and file-oriented
+            PubMed retrieval workflows.
+          </p>
+          <span class="artifact">brief.md + records.jsonl</span>
+        </article>
+
+        <article class="mini-card accent">
+          <span class="eyebrow">Domain Annotation</span>
+          <h2>RPS-BLAST assistant</h2>
+          <p>
+            Deterministic local setup, archive-mode execution, and explainable
+            conserved-domain reporting.
+          </p>
+          <span class="artifact">ASN.1 + rpsbproc output</span>
+        </article>
+      </aside>
+    </main>
+  </body>
+</html>
