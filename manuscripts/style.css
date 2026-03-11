@@ -92,6 +92,31 @@ a {
   padding: 28px 0 22px;
 }
 
+.brand-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.94rem;
+  line-height: 1.5;
+}
+
+.brand-line a {
+  color: var(--teal);
+  text-decoration: none;
+}
+
+.brand-line span {
+  color: rgba(29, 42, 47, 0.34);
+}
+
+.brand-line strong {
+  color: var(--ink);
+  font-weight: 700;
+}
+
 .hero-pills {
   display: flex;
   flex-wrap: wrap;
@@ -484,6 +509,10 @@ h6 {
     border-radius: 999px;
     background: rgba(255, 255, 255, 0.62);
     border: 1px solid var(--line);
+  }
+
+  .brand-line {
+    font-size: 0.88rem;
   }
 
   .button {
