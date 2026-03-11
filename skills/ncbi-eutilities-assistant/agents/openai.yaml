@@ -1,0 +1,4 @@
+interface:
+  display_name: "NCBI E-utilities Assistant"
+  short_description: "Query NCBI Entrez databases through official E-utilities with deterministic search, fetch, summary, link, and history workflows."
+  default_prompt: "Use $ncbi-eutilities-assistant to query NCBI Entrez databases via official E-utilities, including esearch, esummary, efetch, elink, epost, and history-based retrieval."

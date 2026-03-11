@@ -73,6 +73,44 @@ Use rpsblast-assistant to run rpsblast on ./sequence.fasta against ./db/Cdd with
 Use rpsblast-assistant to explain the format of sequence.out and tell me which part is the real tabular data.
 ```
 
+### Use The `ncbi-eutilities-assistant` Skill
+
+Install the skill:
+
+```bash
+# Default target: Codex (~/.codex/skills)
+./scripts/install_skill.sh ncbi-eutilities-assistant
+
+# Claude Code (~/.claude/skills)
+./scripts/install_skill.sh ncbi-eutilities-assistant --tool claude
+```
+
+Then restart your tool session and use natural language.
+
+Codex examples:
+
+```text
+Use $ncbi-eutilities-assistant to search PubMed for "CRISPR base editing" and show me the exact E-utilities request first.
+
+Use $ncbi-eutilities-assistant to run a PubMed workflow for "single-cell foundation model" and save the results under ./pubmed-run.
+
+Use $ncbi-eutilities-assistant to run a PubMed review workflow for "large language model systematic review" over the last 365 days and extract structured abstracts into ./pubmed-review.
+
+Use $ncbi-eutilities-assistant to fetch PubMed summaries for PMID 39696283 and 39650267 as JSON.
+```
+
+Claude Code examples:
+
+```text
+Use ncbi-eutilities-assistant to search PubMed for "CRISPR base editing" and show me the exact E-utilities request first.
+
+Use ncbi-eutilities-assistant to run a PubMed workflow for "single-cell foundation model" and save the results under ./pubmed-run.
+
+Use ncbi-eutilities-assistant to run a PubMed review workflow for "large language model systematic review" over the last 365 days and extract structured abstracts into ./pubmed-review.
+
+Use ncbi-eutilities-assistant to fetch PubMed summaries for PMID 39696283 and 39650267 as JSON.
+```
+
 ### Build This Repository
 
 1. Add an agent from `agents/_templates/agent`.

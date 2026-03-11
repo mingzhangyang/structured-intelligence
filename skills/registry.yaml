@@ -19,3 +19,8 @@ skills:
     version: 0.1.0
     path: skills/rpsblast-assistant
     config: skills/rpsblast-assistant/config.yaml
+  - id: ncbi-eutilities-assistant
+    name: NCBI E-utilities Assistant
+    version: 0.1.0
+    path: skills/ncbi-eutilities-assistant
+    config: skills/ncbi-eutilities-assistant/config.yaml

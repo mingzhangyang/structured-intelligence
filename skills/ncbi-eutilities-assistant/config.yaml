@@ -1,0 +1,14 @@
+id: ncbi-eutilities-assistant
+name: NCBI E-utilities Assistant
+version: 0.1.0
+owner: mingzhang
+description: Query NCBI Entrez databases through official E-utilities with deterministic search, summary, fetch, link, and history workflows.
+entrypoints:
+  - SKILL.md
+default_tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
+  - Fetch
+  - WebSearch
