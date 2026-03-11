@@ -285,7 +285,7 @@ This point also matters institutionally. `ncbi-eutilities-assistant` is an indep
 
 ## 11. Availability
 
-`ncbi-eutilities-assistant` is implemented as a reusable local skill within the Structured Intelligence repository, which is publicly available at `https://github.com/mingzhangyang/structured-intelligence` (accessed March 11, 2026). The repository is distributed under the MIT License. The manuscript source and skill bundle described here are available in that repository, including:
+`ncbi-eutilities-assistant` is implemented as a reusable local skill within the Structured Intelligence repository, which is publicly available at `https://github.com/Scientific-Tooling/structured-intelligence` (accessed March 11, 2026). The repository is distributed under the MIT License. The manuscript source and skill bundle described here are available in that repository, including:
 
 - skill definition and usage guidance
 - deterministic retrieval scripts

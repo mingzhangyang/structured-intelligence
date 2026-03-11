@@ -2,7 +2,7 @@
 
 A repository for production-ready AI assets that improve coding, research, and writing throughput.
 
-Repository: `https://github.com/mingzhangyang/structured-intelligence`
+Repository: `https://github.com/Scientific-Tooling/structured-intelligence`
 
 License: MIT, see [LICENSE](/mnt/c/Users/mingz/Codes/structured-intelligence/LICENSE)
 
@@ -18,7 +18,7 @@ License: MIT, see [LICENSE](/mnt/c/Users/mingz/Codes/structured-intelligence/LIC
 
 ## Availability
 
-This repository is publicly available at `https://github.com/mingzhangyang/structured-intelligence`. It contains reusable local skills, agents, workflows, validation scripts, and manuscript-style documentation for selected skills. The repository is intended for local use in AI-assisted coding and research environments that support filesystem-discovered skill bundles.
+This repository is publicly available at `https://github.com/Scientific-Tooling/structured-intelligence`. It contains reusable local skills, agents, workflows, validation scripts, and manuscript-style documentation for selected skills. The repository is intended for local use in AI-assisted coding and research environments that support filesystem-discovered skill bundles.
 
 Relevant manuscript and skill materials include:
 

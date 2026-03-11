@@ -1,7 +1,7 @@
 {
-  "name": "Structured Intelligence",
-  "short_name": "Structured Intel",
-  "description": "Skill-based scientific tooling for local AI-assisted research workflows.",
+  "name": "Scientific Tooling",
+  "short_name": "Sci Tooling",
+  "description": "A public-facing home for skill-based scientific tooling and local AI-assisted research workflows.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#f4efe4",
