@@ -73,6 +73,17 @@ def strip_fenced_code_blocks(text: str) -> str:
     return re.sub(r"(?ms)^(```|~~~).*?^\1[ \t]*$", "", text)
 
 
+def extract_yaml_frontmatter(text: str) -> dict[str, object] | None:
+    match = re.match(r"\A---\s*\n(.*?)\n---\s*(?:\n|$)", text, re.DOTALL)
+    if not match:
+        return None
+    try:
+        data = yaml.safe_load(match.group(1))
+    except Exception:
+        return None
+    return data if isinstance(data, dict) else None
+
+
 def extract_markdown_headings(text: str) -> list[str]:
     return [match.group(1).strip() for match in re.finditer(r"(?m)^##\s+(.+?)\s*$", text)]
 
@@ -192,7 +203,19 @@ def validate_skill_documentation(skill_dir: Path, entry_label: str, errors: list
         errors.append(f"{entry_label}: missing required file: {skill_md.relative_to(ROOT)}")
         return
 
-    text = strip_fenced_code_blocks(skill_md.read_text(encoding="utf-8"))
+    raw_text = skill_md.read_text(encoding="utf-8")
+    frontmatter = extract_yaml_frontmatter(raw_text)
+    if frontmatter is None:
+        errors.append(f"{entry_label}: SKILL.md missing YAML frontmatter delimited by ---")
+    else:
+        name = frontmatter.get("name")
+        description = frontmatter.get("description")
+        if not is_non_empty_string(name):
+            errors.append(f"{entry_label}: SKILL.md frontmatter 'name' must be a non-empty string")
+        if not is_non_empty_string(description):
+            errors.append(f"{entry_label}: SKILL.md frontmatter 'description' must be a non-empty string")
+
+    text = strip_fenced_code_blocks(raw_text)
     headings = {heading.casefold() for heading in extract_markdown_headings(text)}
     for heading in REQUIRED_SKILL_DOC_HEADINGS:
         if heading.casefold() not in headings:

@@ -1,3 +1,8 @@
+---
+name: ncbi-eutilities-assistant
+description: Query NCBI Entrez databases through official E-utilities with deterministic search, summary, fetch, link, and history workflows.
+---
+
 # Skill: NCBI E-utilities Assistant
 
 ## Use When
@@ -6,6 +11,7 @@
 - A user needs deterministic command-line access to `einfo`, `esearch`, `esummary`, `efetch`, `elink`, or `epost`.
 - A user wants a higher-level PubMed workflow that searches, summarizes, and optionally fetches abstracts/full records in one command.
 - A user wants a PubMed literature-review workflow that extracts titles, abstracts, authors, MeSH terms, keywords, and article IDs into structured JSON/JSONL.
+- A user wants a time-bounded PubMed research update brief, such as "show me the last 7 days of CRISPR progress" or "summarize the last month of base editing papers."
 - A user wants to retrieve records in batches, page through results, or use the Entrez History server (`WebEnv` + `query_key`) instead of issuing one request per ID.
 - A user wants the exact request URL, method, and parameters before making the network call.
 
@@ -29,6 +35,11 @@
     - output directory
     - optional date and sort filters
     - optional explicit `records.json` / `records.jsonl` output paths
+  - for the PubMed update brief flow:
+    - topic term, such as `CRISPR`, `base editing`, or `prime editing`
+    - relative date window such as 7 or 30 days, or explicit date range
+    - maximum number of papers to include
+    - output directory and optional markdown brief path
   - `email`, `tool`, and `api_key`
   - `retmode`, `rettype`, `retmax`, `retstart`, `sort`, and date filters
   - output path
@@ -46,13 +57,15 @@
    - `scripts/run.sh post`
    - `scripts/run.sh pubmed-workflow`
    - `scripts/run.sh pubmed-review`
+   - `scripts/run.sh pubmed-update-brief`
 3. Include `--email` whenever available. Keep `--tool` set unless the user has a strong reason to override it. Include `--api-key` when higher request throughput is needed.
 4. Prefer `search --usehistory y` for large result sets, then continue with `summary` or `fetch` using `--webenv` and `--query-key`.
 5. For PubMed-first tasks, prefer `pubmed-workflow` over hand-building three separate commands unless the user explicitly wants raw endpoint-level control.
 6. For literature-review preparation, prefer `pubmed-review`; it performs PubMed retrieval and extracts structured records from `efetch` XML.
-7. Use `--dry-run` before live calls when the user wants to inspect or approve the request shape.
-8. For long ID lists or `--id-file`, let the script auto-select `POST`.
-9. Report the exact command, endpoint, database, key parameters, and where the response was written.
+7. For recurring "latest progress" requests, prefer `pubmed-update-brief`; it writes a deterministic `brief.md` draft plus the raw retrieval artifacts.
+8. Use `--dry-run` before live calls when the user wants to inspect or approve the request shape.
+9. For long ID lists or `--id-file`, let the script auto-select `POST`.
+10. Report the exact command, endpoint, database, key parameters, and where the response was written.
 
 ## Output Contract
 
@@ -76,6 +89,14 @@
   - `efetch.xml`
   - `records.json`
   - `records.jsonl`
+  - `manifest.json`
+- For `pubmed-update-brief`:
+  - `esearch.json`
+  - `esummary.json`
+  - `efetch.xml`
+  - `records.json`
+  - `records.jsonl`
+  - `brief.md`
   - `manifest.json`
 - For history workflows:
   - whether the response contains `WebEnv` / `query_key`

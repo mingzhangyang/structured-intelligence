@@ -142,6 +142,25 @@ Each extracted record includes fields intended for downstream review work, such 
 - `keywords`
 - `article_ids`
 
+### Run a recent-progress PubMed update brief
+
+```bash
+./skills/ncbi-eutilities-assistant/scripts/run.sh pubmed-update-brief \
+  --term 'CRISPR' \
+  --reldate 7 \
+  --retmax 20 \
+  --out-dir ./crispr-weekly-brief
+```
+
+This workflow does:
+
+1. `esearch` against `pubmed` over a recent time window
+2. `esummary` and `efetch` for the retrieved batch
+3. extracts structured records into JSON and JSONL
+4. writes a deterministic `brief.md` summarizing notable papers, repeated themes, and a watchlist
+
+For a monthly brief, change `--reldate 7` to `--reldate 30`.
+
 ## Parameter Notes
 
 - `db` names are Entrez database identifiers such as `pubmed`, `gene`, `protein`, `nuccore`, `assembly`, and `snp`.

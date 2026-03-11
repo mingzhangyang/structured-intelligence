@@ -1,3 +1,8 @@
+---
+name: <skill-id>
+description: <one-line-description>
+---
+
 # Skill: <skill-id>
 
 ## Use When

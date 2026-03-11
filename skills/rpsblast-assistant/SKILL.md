@@ -1,3 +1,8 @@
+---
+name: rpsblast-assistant
+description: Use natural language to prepare, run, and interpret standalone rpsblast, rpstblastn, and rpsbproc workflows against NCBI CDD assets.
+---
+
 # Skill: rpsblast-assistant
 
 ## Use When

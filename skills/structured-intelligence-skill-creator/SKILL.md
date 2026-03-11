@@ -1,3 +1,8 @@
+---
+name: structured-intelligence-skill-creator
+description: Create or update repository skills that conform to local templates, provider metadata requirements, registry rules, and validation workflows.
+---
+
 # Skill: structured-intelligence-skill-creator
 
 ## Use When

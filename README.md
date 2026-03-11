@@ -96,6 +96,10 @@ Use $ncbi-eutilities-assistant to run a PubMed workflow for "single-cell foundat
 
 Use $ncbi-eutilities-assistant to run a PubMed review workflow for "large language model systematic review" over the last 365 days and extract structured abstracts into ./pubmed-review.
 
+Use $ncbi-eutilities-assistant to show me the last 7 days of CRISPR progress on PubMed and write a concise update brief under ./crispr-weekly-brief.
+
+Use $ncbi-eutilities-assistant to summarize the last 30 days of base editing research on PubMed into a markdown update brief.
+
 Use $ncbi-eutilities-assistant to fetch PubMed summaries for PMID 39696283 and 39650267 as JSON.
 ```
 
@@ -107,6 +111,10 @@ Use ncbi-eutilities-assistant to search PubMed for "CRISPR base editing" and sho
 Use ncbi-eutilities-assistant to run a PubMed workflow for "single-cell foundation model" and save the results under ./pubmed-run.
 
 Use ncbi-eutilities-assistant to run a PubMed review workflow for "large language model systematic review" over the last 365 days and extract structured abstracts into ./pubmed-review.
+
+Use ncbi-eutilities-assistant to show me the last 7 days of CRISPR progress on PubMed and write a concise update brief under ./crispr-weekly-brief.
+
+Use ncbi-eutilities-assistant to summarize the last 30 days of base editing research on PubMed into a markdown update brief.
 
 Use ncbi-eutilities-assistant to fetch PubMed summaries for PMID 39696283 and 39650267 as JSON.
 ```

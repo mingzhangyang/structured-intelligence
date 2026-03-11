@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import argparse
+from collections import Counter
 import json
 import os
 import re
@@ -15,6 +16,45 @@ from urllib import error, parse, request
 DEFAULT_BASE_URL = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils"
 DEFAULT_TOOL = "structured-intelligence-ncbi-eutilities-assistant"
 REQUEST_METHOD_CHOICES = ("auto", "get", "post")
+STOPWORDS = {
+    "about",
+    "after",
+    "among",
+    "analysis",
+    "approach",
+    "based",
+    "between",
+    "crispr",
+    "data",
+    "from",
+    "gene",
+    "genes",
+    "human",
+    "into",
+    "latest",
+    "medline",
+    "method",
+    "methods",
+    "model",
+    "models",
+    "paper",
+    "papers",
+    "patients",
+    "pubmed",
+    "recent",
+    "research",
+    "results",
+    "review",
+    "reviews",
+    "study",
+    "studies",
+    "systematic",
+    "their",
+    "these",
+    "this",
+    "using",
+    "with",
+}
 
 
 def fail(message: str) -> int:
@@ -374,6 +414,165 @@ def parse_pubmed_xml_records(payload: bytes) -> list[dict[str, Any]]:
     return records
 
 
+def split_sentences(text: str) -> list[str]:
+    parts = re.split(r"(?<=[.!?])\s+", text.strip())
+    return [part.strip() for part in parts if part.strip()]
+
+
+def record_summary_snippet(record: dict[str, Any]) -> str:
+    abstract = record.get("abstract")
+    if not isinstance(abstract, str) or not abstract.strip():
+        return "No abstract text available in the retrieved PubMed XML."
+
+    sections = record.get("abstract_sections")
+    if isinstance(sections, list):
+        preferred_labels = ("result", "conclusion", "finding", "background", "objective")
+        for target in preferred_labels:
+            for section in sections:
+                if not isinstance(section, dict):
+                    continue
+                label = str(section.get("label", "")).lower()
+                category = str(section.get("category", "")).lower()
+                text = str(section.get("text", "")).strip()
+                if text and (target in label or target in category):
+                    return split_sentences(text)[0] if split_sentences(text) else text
+
+    sentences = split_sentences(abstract)
+    return sentences[0] if sentences else abstract.strip()
+
+
+def author_summary(authors: list[dict[str, str]]) -> str:
+    names: list[str] = []
+    for author in authors[:3]:
+        if "collective_name" in author:
+            names.append(author["collective_name"])
+            continue
+        last_name = author.get("last_name")
+        fore_name = author.get("fore_name")
+        if last_name and fore_name:
+            names.append(f"{fore_name} {last_name}")
+        elif last_name:
+            names.append(last_name)
+    if not names:
+        return "Author metadata unavailable"
+    if len(authors) > 3:
+        return ", ".join(names) + ", et al."
+    return ", ".join(names)
+
+
+def top_counter_items(values: list[str], limit: int) -> list[tuple[str, int]]:
+    counter = Counter(value for value in values if value)
+    return counter.most_common(limit)
+
+
+def extract_title_terms(records: list[dict[str, Any]], limit: int) -> list[tuple[str, int]]:
+    counter: Counter[str] = Counter()
+    for record in records:
+        title = record.get("title")
+        if not isinstance(title, str):
+            continue
+        for token in re.findall(r"[A-Za-z][A-Za-z0-9-]{3,}", title.lower()):
+            if token in STOPWORDS:
+                continue
+            counter[token] += 1
+    return counter.most_common(limit)
+
+
+def describe_time_window(args: argparse.Namespace) -> str:
+    if getattr(args, "reldate", None):
+        days = int(args.reldate)
+        return f"last {days} day{'s' if days != 1 else ''}"
+    if getattr(args, "mindate", None) or getattr(args, "maxdate", None):
+        start = args.mindate or "open start"
+        end = args.maxdate or "open end"
+        return f"{start} to {end}"
+    return "latest available records"
+
+
+def build_pubmed_brief_markdown(
+    *,
+    term: str,
+    args: argparse.Namespace,
+    records: list[dict[str, Any]],
+    manifest: dict[str, Any],
+) -> str:
+    lines: list[str] = []
+    top_papers = min(max(getattr(args, "top_papers", 8), 1), max(len(records), 1))
+    mesh_items = top_counter_items(
+        [mesh.split(" | ", 1)[0] for record in records for mesh in record.get("mesh_terms", []) if isinstance(mesh, str)],
+        5,
+    )
+    pubtype_items = top_counter_items(
+        [item for record in records for item in record.get("publication_types", []) if isinstance(item, str)],
+        5,
+    )
+    journal_items = top_counter_items(
+        [record.get("journal") for record in records if isinstance(record.get("journal"), str)],
+        5,
+    )
+    title_terms = extract_title_terms(records, 8)
+
+    lines.append(f"# PubMed Update Brief: {term}")
+    lines.append("")
+    lines.append("## Search Frame")
+    lines.append("")
+    lines.append(f"- Query term: `{term}`")
+    lines.append(f"- Time window: {describe_time_window(args)}")
+    lines.append(f"- Records analyzed in this batch: {len(records)}")
+    lines.append(f"- Total PubMed hits reported: {manifest.get('total_count', 0)}")
+    lines.append(f"- Sort: {getattr(args, 'sort', None) or 'PubMed default'}")
+    lines.append("")
+    lines.append("## Executive Snapshot")
+    lines.append("")
+    if not records:
+        lines.append("- No PubMed records matched the current query window.")
+    else:
+        if title_terms:
+            lines.append("- Repeated title/topic signals: " + ", ".join(f"{term} ({count})" for term, count in title_terms[:5]))
+        if mesh_items:
+            lines.append("- Frequent MeSH/topic labels: " + ", ".join(f"{name} ({count})" for name, count in mesh_items))
+        if pubtype_items:
+            lines.append("- Common publication types: " + ", ".join(f"{name} ({count})" for name, count in pubtype_items))
+        if journal_items:
+            lines.append("- Journals appearing in this batch: " + ", ".join(f"{name} ({count})" for name, count in journal_items[:4]))
+    lines.append("")
+    lines.append("## Notable Papers")
+    lines.append("")
+    for idx, record in enumerate(records[:top_papers], start=1):
+        title = record.get("title") or "Untitled record"
+        pmid = record.get("pmid") or "unknown"
+        journal = record.get("journal") or "Journal unavailable"
+        year = record.get("publication_year") or "year unavailable"
+        snippet = record_summary_snippet(record)
+        lines.append(f"### {idx}. {title}")
+        lines.append("")
+        lines.append(f"- PMID: `{pmid}`")
+        lines.append(f"- Journal/year: {journal} ({year})")
+        lines.append(f"- Authors: {author_summary(record.get('authors', [])) if isinstance(record.get('authors'), list) else 'Author metadata unavailable'}")
+        lines.append(f"- Abstract signal: {snippet}")
+        mesh_terms = record.get("mesh_terms")
+        if isinstance(mesh_terms, list) and mesh_terms:
+            lines.append("- MeSH terms: " + ", ".join(mesh_terms[:5]))
+        article_ids = record.get("article_ids")
+        if isinstance(article_ids, dict) and article_ids:
+            ext_ids = ", ".join(f"{key}={value}" for key, value in article_ids.items())
+            lines.append(f"- IDs: {ext_ids}")
+        lines.append("")
+
+    lines.append("## Watchlist")
+    lines.append("")
+    if records:
+        lines.append("- PMIDs to review manually: " + ", ".join(str(record.get("pmid")) for record in records[: min(len(records), 10)] if record.get("pmid")))
+    else:
+        lines.append("- No watchlist generated because the query returned no records.")
+    lines.append("")
+    lines.append("## Notes")
+    lines.append("")
+    lines.append("- This brief is a deterministic draft built from PubMed metadata and abstract text.")
+    lines.append("- Use the retrieved `records.json` or `records.jsonl` for deeper AI synthesis or manual review.")
+    return "\n".join(lines).rstrip() + "\n"
+
+
 def build_pubmed_workflow_parser(subparsers: argparse._SubParsersAction[argparse.ArgumentParser], parents: list[argparse.ArgumentParser]) -> None:
     parser = subparsers.add_parser("pubmed-workflow", parents=parents, help="Run a higher-level PubMed retrieval workflow")
     parser.add_argument("--term", required=True, help="PubMed query term.")
@@ -421,6 +620,32 @@ def build_pubmed_review_parser(subparsers: argparse._SubParsersAction[argparse.A
     parser.add_argument("--records-out", type=Path, help="Optional explicit JSON output path for extracted records.")
     parser.add_argument("--records-jsonl-out", type=Path, help="Optional explicit JSONL output path for extracted records.")
     parser.set_defaults(handler=handle_pubmed_review)
+
+
+def build_pubmed_update_brief_parser(subparsers: argparse._SubParsersAction[argparse.ArgumentParser], parents: list[argparse.ArgumentParser]) -> None:
+    parser = subparsers.add_parser("pubmed-update-brief", parents=parents, help="Run a PubMed update workflow and write a concise markdown brief")
+    parser.add_argument("--term", required=True, help="PubMed query term.")
+    parser.add_argument("--retmax", type=int, default=20, help="Number of PubMed records to retrieve for the brief.")
+    parser.add_argument("--retstart", type=int, default=0, help="Starting PubMed search offset.")
+    parser.add_argument("--sort", default="pub date", help="PubMed sort order. Default: pub date.")
+    parser.add_argument("--field", help="Optional field restriction for the search term.")
+    parser.add_argument("--datetype", help="Date type filter.")
+    parser.add_argument("--reldate", type=int, default=7, help="Relative date filter in days. Default: 7.")
+    parser.add_argument("--mindate", help="Minimum date.")
+    parser.add_argument("--maxdate", help="Maximum date.")
+    parser.add_argument("--summary-version", help="ESummary version, such as 2.0.")
+    parser.add_argument("--top-papers", type=int, default=8, help="How many papers to highlight in the markdown brief.")
+    parser.add_argument(
+        "--out-dir",
+        type=Path,
+        default=Path("pubmed-update-brief-output"),
+        help="Directory for raw PubMed responses, extracted records, markdown brief, and manifest.",
+    )
+    parser.add_argument("--manifest-out", type=Path, help="Optional explicit manifest path.")
+    parser.add_argument("--records-out", type=Path, help="Optional explicit JSON output path for extracted records.")
+    parser.add_argument("--records-jsonl-out", type=Path, help="Optional explicit JSONL output path for extracted records.")
+    parser.add_argument("--brief-out", type=Path, help="Optional explicit markdown brief output path.")
+    parser.set_defaults(handler=handle_pubmed_update_brief)
 
 
 def build_info_parser(subparsers: argparse._SubParsersAction[argparse.ArgumentParser], parents: list[argparse.ArgumentParser]) -> None:
@@ -788,6 +1013,161 @@ def handle_pubmed_review(args: argparse.Namespace) -> int:
         return fail(str(exc))
 
 
+def handle_pubmed_update_brief(args: argparse.Namespace) -> int:
+    if args.out:
+        return fail(
+            "pubmed-update-brief writes multiple files; use --out-dir, --brief-out, --records-out, or --manifest-out instead of --out"
+        )
+
+    out_dir: Path = args.out_dir
+    manifest_path = args.manifest_out or out_dir / "manifest.json"
+    records_path = args.records_out or out_dir / "records.json"
+    records_jsonl_path = args.records_jsonl_out or out_dir / "records.jsonl"
+    brief_path = args.brief_out or out_dir / "brief.md"
+    search_path = out_dir / "esearch.json"
+    summary_path = out_dir / "esummary.json"
+    fetch_path = out_dir / "efetch.xml"
+
+    search_params = build_common_params(args)
+    search_params["db"] = "pubmed"
+    search_params["term"] = args.term
+    search_params["retmax"] = str(args.retmax)
+    search_params["retstart"] = str(args.retstart)
+    search_params["usehistory"] = "y"
+    search_params["retmode"] = "json"
+    add_optional_param(search_params, "sort", args.sort)
+    add_optional_param(search_params, "field", args.field)
+    add_optional_param(search_params, "datetype", args.datetype)
+    add_optional_param(search_params, "reldate", args.reldate)
+    add_optional_param(search_params, "mindate", args.mindate)
+    add_optional_param(search_params, "maxdate", args.maxdate)
+
+    summary_template = build_common_params(args)
+    summary_template["db"] = "pubmed"
+    summary_template["retmode"] = "json"
+    add_optional_param(summary_template, "retstart", args.retstart)
+    add_optional_param(summary_template, "retmax", args.retmax)
+    add_optional_param(summary_template, "version", args.summary_version)
+    summary_template["WebEnv"] = "<from esearch>"
+    summary_template["query_key"] = "<from esearch>"
+
+    fetch_template = build_common_params(args)
+    fetch_template["db"] = "pubmed"
+    fetch_template["WebEnv"] = "<from esearch>"
+    fetch_template["query_key"] = "<from esearch>"
+    add_optional_param(fetch_template, "retstart", args.retstart)
+    add_optional_param(fetch_template, "retmax", args.retmax)
+    fetch_template["retmode"] = "xml"
+    fetch_template["rettype"] = "abstract"
+
+    if args.dry_run:
+        plan = {
+            "workflow": "pubmed-update-brief",
+            "outputs": {
+                "search": str(search_path),
+                "summary": str(summary_path),
+                "fetch": str(fetch_path),
+                "records": str(records_path),
+                "records_jsonl": str(records_jsonl_path),
+                "brief": str(brief_path),
+                "manifest": str(manifest_path),
+            },
+            "steps": [
+                build_request_plan("esearch", search_params, args, redact=True),
+                build_request_plan("esummary", summary_template, args, redact=True),
+                build_request_plan("efetch", fetch_template, args, redact=True),
+            ],
+        }
+        print(json.dumps(plan, indent=2, ensure_ascii=True))
+        return 0
+
+    try:
+        search_payload = request_bytes("esearch", search_params, args)
+        search_json = decode_json_bytes(search_payload, "esearch")
+        write_bytes(search_path, search_payload)
+
+        search_result = search_json.get("esearchresult")
+        if not isinstance(search_result, dict):
+            raise ValueError("esearch response is missing 'esearchresult'")
+
+        ids = search_result.get("idlist")
+        if not isinstance(ids, list):
+            ids = []
+        ids = [str(value) for value in ids]
+
+        count_raw = search_result.get("count", "0")
+        try:
+            total_count = int(str(count_raw))
+        except ValueError:
+            raise ValueError(f"Unexpected PubMed count value: {count_raw!r}") from None
+
+        webenv = search_result.get("webenv")
+        query_key = search_result.get("querykey")
+        if total_count > 0 and (not webenv or not query_key):
+            raise ValueError("PubMed update brief expected WebEnv and query_key from esearch but did not receive them")
+
+        extracted_records: list[dict[str, Any]] = []
+        summary_path_written: str | None = None
+        fetch_path_written: str | None = None
+
+        if total_count > 0:
+            summary_params = build_common_params(args)
+            summary_params["db"] = "pubmed"
+            summary_params["retmode"] = "json"
+            summary_params["WebEnv"] = str(webenv)
+            summary_params["query_key"] = str(query_key)
+            add_optional_param(summary_params, "retstart", args.retstart)
+            add_optional_param(summary_params, "retmax", args.retmax)
+            add_optional_param(summary_params, "version", args.summary_version)
+            summary_payload = request_bytes("esummary", summary_params, args)
+            write_bytes(summary_path, summary_payload)
+            summary_path_written = str(summary_path)
+
+            fetch_params = build_common_params(args)
+            fetch_params["db"] = "pubmed"
+            fetch_params["WebEnv"] = str(webenv)
+            fetch_params["query_key"] = str(query_key)
+            add_optional_param(fetch_params, "retstart", args.retstart)
+            add_optional_param(fetch_params, "retmax", args.retmax)
+            fetch_params["retmode"] = "xml"
+            fetch_params["rettype"] = "abstract"
+            fetch_payload = request_bytes("efetch", fetch_params, args)
+            write_bytes(fetch_path, fetch_payload)
+            fetch_path_written = str(fetch_path)
+            extracted_records = parse_pubmed_xml_records(fetch_payload)
+
+        write_json(records_path, extracted_records)
+        jsonl_lines = "\n".join(json.dumps(record, ensure_ascii=True) for record in extracted_records)
+        write_bytes(records_jsonl_path, (jsonl_lines + ("\n" if jsonl_lines else "")).encode("utf-8"))
+
+        manifest = {
+            "workflow": "pubmed-update-brief",
+            "term": args.term,
+            "total_count": total_count,
+            "retstart": args.retstart,
+            "retmax": args.retmax,
+            "returned_ids": ids,
+            "extracted_record_count": len(extracted_records),
+            "webenv": webenv,
+            "query_key": query_key,
+            "paths": {
+                "search": str(search_path),
+                "summary": summary_path_written,
+                "fetch": fetch_path_written,
+                "records": str(records_path),
+                "records_jsonl": str(records_jsonl_path),
+                "brief": str(brief_path),
+            },
+        }
+        brief_markdown = build_pubmed_brief_markdown(term=args.term, args=args, records=extracted_records, manifest=manifest)
+        write_bytes(brief_path, brief_markdown.encode("utf-8"))
+        write_json(manifest_path, manifest)
+        print(json.dumps(manifest, indent=2, ensure_ascii=True))
+        return 0
+    except ValueError as exc:
+        return fail(str(exc))
+
+
 def handle_info(args: argparse.Namespace) -> int:
     params = build_common_params(args)
     add_optional_param(params, "db", args.db)
@@ -901,6 +1281,7 @@ def build_parser() -> argparse.ArgumentParser:
     build_post_parser(subparsers, parents)
     build_pubmed_workflow_parser(subparsers, parents)
     build_pubmed_review_parser(subparsers, parents)
+    build_pubmed_update_brief_parser(subparsers, parents)
     return parser
 
 
