@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://mingzhangyang.github.io/structured-intelligence/</loc>
+    <loc>https://scientifictooling.org/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://mingzhangyang.github.io/structured-intelligence/manuscripts/</loc>
+    <loc>https://scientifictooling.org/manuscripts/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://mingzhangyang.github.io/structured-intelligence/manuscripts/ncbi-eutilities-assistant/</loc>
+    <loc>https://scientifictooling.org/manuscripts/ncbi-eutilities-assistant/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://mingzhangyang.github.io/structured-intelligence/manuscripts/rpsblast-assistant/</loc>
+    <loc>https://scientifictooling.org/manuscripts/rpsblast-assistant/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

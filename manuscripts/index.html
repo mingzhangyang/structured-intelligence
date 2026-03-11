@@ -8,7 +8,7 @@
       name="description"
       content="Web versions of Structured Intelligence manuscripts for the scientific community."
     />
-    <link rel="canonical" href="https://mingzhangyang.github.io/structured-intelligence/manuscripts/" />
+    <link rel="canonical" href="https://scientifictooling.org/manuscripts/" />
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
@@ -27,10 +27,12 @@
 
       <header class="hero">
         <p class="eyebrow">Scientific Writing</p>
-        <h1>Manuscripts as readable web pages.</h1>
+        <h1>Publication-ready entry points for repository manuscripts.</h1>
         <p>
           These pages present the repository's manuscript drafts in a web-native
-          format while preserving the underlying markdown sources in `docs/`.
+          format while preserving the underlying markdown sources in `docs/`. The
+          goal is to make methods, positioning, and availability statements easier
+          to read, share, and discuss.
         </p>
         <div class="hero-pills">
           <span class="meta-pill">Readable web layouts</span>
@@ -39,41 +41,71 @@
         </div>
       </header>
 
-      <main class="card-grid">
-        <article class="card card-feature">
-          <p class="eyebrow">NCBI / Literature</p>
-          <h2>NCBI E-utilities in the AI Era</h2>
-          <p>
-            A manuscript on turning E-utilities into reusable literature retrieval,
-            review extraction, and research update workflows.
-          </p>
-          <div class="article-meta">
-            <span class="meta-pill">PubMed workflows</span>
-            <span class="meta-pill">AI-mediated retrieval</span>
+      <section class="publication-frame">
+        <div class="publication-header">
+          <div>
+            <p class="eyebrow">Current Collection</p>
+            <h2>Structured Intelligence Manuscript Series</h2>
           </div>
-          <div class="card-links">
-            <a class="button button-primary" href="./ncbi-eutilities-assistant/">Read web page</a>
-            <a class="button button-secondary" href="../ncbi-eutilities-assistant-manuscript.md">Open markdown</a>
+          <div class="publication-meta">
+            <span class="meta-pill">2 web editions</span>
+            <span class="meta-pill">Methods and positioning</span>
+            <span class="meta-pill">Independent AI interface layer</span>
           </div>
-        </article>
+        </div>
 
-        <article class="card card-feature">
-          <p class="eyebrow">CDD / Annotation</p>
-          <h2>RPS-BLAST in the AI Era</h2>
+        <div class="editor-note">
+          <p class="eyebrow">Editorial Note</p>
           <p>
-            A manuscript on wrapping standalone RPS-BLAST and `rpsbproc` into a
-            reusable AI-mediated domain-annotation workflow.
+            Each manuscript pairs a repository skill with a publication-style explanation
+            of why the underlying scientific workflow matters, where operational barriers
+            exist, and how a transparent local AI layer can improve reuse without obscuring
+            the original method.
           </p>
-          <div class="article-meta">
-            <span class="meta-pill">Standalone CDD</span>
-            <span class="meta-pill">Explainable execution</span>
-          </div>
-          <div class="card-links">
-            <a class="button button-primary" href="./rpsblast-assistant/">Read web page</a>
-            <a class="button button-secondary" href="../rpsblast-assistant-manuscript.md">Open markdown</a>
-          </div>
-        </article>
-      </main>
+        </div>
+
+        <main class="card-grid publication-grid">
+          <article class="card card-feature publication-card">
+            <div class="publication-kicker">
+              <p class="eyebrow">Article 01</p>
+              <span class="issue-pill">NCBI / Literature</span>
+            </div>
+            <h2>NCBI E-utilities in the AI Era</h2>
+            <p>
+              A manuscript on turning E-utilities into reusable literature retrieval,
+              review extraction, and research update workflows.
+            </p>
+            <div class="article-meta">
+              <span class="meta-pill">PubMed workflows</span>
+              <span class="meta-pill">AI-mediated retrieval</span>
+            </div>
+            <div class="card-links">
+              <a class="button button-primary" href="./ncbi-eutilities-assistant/">Read web page</a>
+              <a class="button button-secondary" href="../ncbi-eutilities-assistant-manuscript.md">Open markdown</a>
+            </div>
+          </article>
+
+          <article class="card card-feature publication-card">
+            <div class="publication-kicker">
+              <p class="eyebrow">Article 02</p>
+              <span class="issue-pill">CDD / Annotation</span>
+            </div>
+            <h2>RPS-BLAST in the AI Era</h2>
+            <p>
+              A manuscript on wrapping standalone RPS-BLAST and `rpsbproc` into a
+              reusable AI-mediated domain-annotation workflow.
+            </p>
+            <div class="article-meta">
+              <span class="meta-pill">Standalone CDD</span>
+              <span class="meta-pill">Explainable execution</span>
+            </div>
+            <div class="card-links">
+              <a class="button button-primary" href="./rpsblast-assistant/">Read web page</a>
+              <a class="button button-secondary" href="../rpsblast-assistant-manuscript.md">Open markdown</a>
+            </div>
+          </article>
+        </main>
+      </section>
     </div>
   </body>
 </html>

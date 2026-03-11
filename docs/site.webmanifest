@@ -2,19 +2,19 @@
   "name": "Structured Intelligence",
   "short_name": "Structured Intel",
   "description": "Skill-based scientific tooling for local AI-assisted research workflows.",
-  "start_url": "/structured-intelligence/",
+  "start_url": "/",
   "display": "standalone",
   "background_color": "#f4efe4",
   "theme_color": "#1b7668",
   "icons": [
     {
-      "src": "/structured-intelligence/logo.png",
+      "src": "/logo.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/structured-intelligence/logo.svg",
+      "src": "/logo.svg",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any"

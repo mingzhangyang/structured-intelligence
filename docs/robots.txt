@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://mingzhangyang.github.io/structured-intelligence/sitemap.xml
+Sitemap: https://scientifictooling.org/sitemap.xml

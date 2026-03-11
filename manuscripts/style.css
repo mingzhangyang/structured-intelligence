@@ -98,6 +98,49 @@ a {
   gap: 10px;
 }
 
+.publication-frame {
+  display: grid;
+  gap: 18px;
+  padding: 24px;
+  margin-bottom: 40px;
+  border-radius: 34px;
+  background: var(--paper);
+  border: 1px solid rgba(255, 255, 255, 0.54);
+  box-shadow: var(--shadow);
+}
+
+.publication-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 18px;
+}
+
+.publication-header h2 {
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  line-height: 1.05;
+}
+
+.publication-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.editor-note {
+  padding: 18px 20px;
+  border-radius: 24px;
+  background: var(--paper-strong);
+  border: 1px solid var(--line);
+}
+
+.editor-note p:last-child {
+  margin-top: 8px;
+  color: var(--muted);
+  line-height: 1.72;
+}
+
 .eyebrow {
   margin: 0;
   color: var(--teal);
@@ -138,6 +181,10 @@ h6 {
   padding-bottom: 40px;
 }
 
+.publication-grid {
+  padding-bottom: 0;
+}
+
 .card,
 .article-shell {
   background: var(--paper);
@@ -161,6 +208,32 @@ h6 {
   inset: 0 0 auto 0;
   height: 4px;
   background: linear-gradient(90deg, var(--teal), var(--gold));
+}
+
+.publication-card {
+  display: grid;
+  align-content: start;
+  gap: 0;
+  min-height: 280px;
+}
+
+.publication-kicker {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.issue-pill {
+  min-height: 34px;
+  padding: 0 12px;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  background: rgba(189, 123, 34, 0.08);
+  color: var(--ink);
+  font-size: 0.86rem;
+  font-weight: 700;
 }
 
 .card p {
@@ -371,6 +444,15 @@ h6 {
 
   .article-side {
     position: static;
+  }
+
+  .publication-header {
+    flex-direction: column;
+    align-items: start;
+  }
+
+  .publication-meta {
+    justify-content: flex-start;
   }
 }
 
