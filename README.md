@@ -151,6 +151,27 @@ Use ncbi-eutilities-assistant to fetch PubMed summaries for PMID 39696283 and 39
    It syncs the shared `theme.css` into `docs/` and `manuscripts/` so project pages
    keep the same hero-title and typography system as the organization homepage.
 
+### Shared Page Theme
+
+Use this workflow whenever you add a new public-facing page or change hero-title styles:
+
+1. Treat `Scientific-Tooling.github.io/theme.css` as the source of truth for shared
+   typography tokens and semantic title classes.
+2. If you change shared title styling there, run `./scripts/sync_site_theme.sh` in
+   this repository before editing downstream pages.
+3. In every new page, include the shared theme before the page stylesheet:
+   - project pages: `./theme.css` then `./site.css`
+   - manuscript pages: `./theme.css` or `../theme.css` then the local stylesheet
+4. Use semantic classes instead of redefining hero sizes per page:
+   - `.title-hero`
+   - `.title-hero--wide`
+   - `.title-section`
+   - `.lede`
+   - `.eyebrow`
+5. Keep page-specific CSS focused on layout and spacing. Do not redefine shared
+   hero-title font sizes or families in page-level styles unless you are changing
+   the shared system itself.
+
 ## Citation And Reuse
 
 If you reference this repository in scientific writing, cite the repository URL and the access date, and identify the relevant manuscript or skill directory when possible. For example, the skill-focused manuscripts in `docs/` describe the corresponding implementations under `skills/`.
