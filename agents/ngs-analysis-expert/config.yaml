@@ -1,0 +1,25 @@
+id: ngs-analysis-expert
+name: NGS Analysis Expert
+version: 0.1.0
+owner: mingzhang
+description: Expert bioinformatics agent for designing, executing, and troubleshooting WGS/WES, RNA-seq, and metagenomics analysis pipelines.
+entrypoints:
+  - prompts/system.md
+default_skills:
+  - ngs-quality-control
+  - ngs-read-preprocessing
+  - genome-read-alignment
+  - genome-variant-calling
+  - genome-variant-filtering
+  - genome-variant-annotation
+  - genome-alignment-qc
+  - rnaseq-read-alignment
+  - rnaseq-transcript-quantification
+  - rnaseq-read-counting
+  - rnaseq-differential-expression
+  - rnaseq-alignment-qc
+  - metagenome-host-removal
+  - metagenome-taxonomic-profiling
+  - metagenome-assembly
+  - metagenome-binning
+  - metagenome-functional-profiling

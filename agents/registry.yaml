@@ -1,1 +1,6 @@
-agents: []
+agents:
+  - id: ngs-analysis-expert
+    name: NGS Analysis Expert
+    version: 0.1.0
+    path: agents/ngs-analysis-expert
+    config: agents/ngs-analysis-expert/config.yaml
