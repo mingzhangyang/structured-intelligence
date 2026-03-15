@@ -14,55 +14,128 @@ suppressPackageStartupMessages({
 
 # --- Argument parsing ---
 option_list <- list(
-  make_option("--counts", type = "character", help = "Count matrix TSV (gene IDs as rows, samples as columns)"),
+  make_option("--counts", type = "character", default = NULL,
+              help = "Count matrix TSV (gene IDs as rows, samples as columns)"),
+  make_option("--quant-dirs", type = "character", default = NULL,
+              help = "Quant directory manifest TSV (sample_id<TAB>path), for Salmon/kallisto tximport"),
+  make_option("--tx2gene", type = "character", default = NULL,
+              help = "Transcript-to-gene TSV (tx_id<TAB>gene_id, no header). Required with --quant-dirs"),
+  make_option("--quant-type", type = "character", default = "salmon",
+              help = "Quantifier: salmon or kallisto [default: salmon]"),
   make_option("--metadata", type = "character", help = "Sample metadata TSV (sample_id, condition, [batch])"),
-  make_option("--contrast", type = "character", default = NULL, help = "Contrast: comma-separated condition levels (e.g., treated,control)"),
+  make_option("--contrast", type = "character", default = NULL,
+              help = "Contrast: comma-separated condition levels (e.g., treated,control)"),
   make_option("--fdr", type = "double", default = 0.05, help = "FDR threshold [default: 0.05]"),
   make_option("--lfc", type = "double", default = 1, help = "log2 fold-change threshold [default: 1]"),
-  make_option("--outdir", type = "character", default = "./de_output", help = "Output directory [default: ./de_output]")
+  make_option("--outdir", type = "character", default = "./de_output",
+              help = "Output directory [default: ./de_output]")
 )
 
 opt <- parse_args(OptionParser(option_list = option_list))
 
-if (is.null(opt$counts) || is.null(opt$metadata)) {
-  stop("--counts and --metadata are required.")
+counts_mode   <- !is.null(opt$counts)
+tximport_mode <- !is.null(opt[["quant-dirs"]])
+
+if (!counts_mode && !tximport_mode) {
+  stop("Either --counts or --quant-dirs is required.")
+}
+if (counts_mode && tximport_mode) {
+  stop("--counts and --quant-dirs are mutually exclusive.")
+}
+if (tximport_mode && is.null(opt$tx2gene)) {
+  stop("--tx2gene is required when using --quant-dirs.")
+}
+if (is.null(opt$metadata)) {
+  stop("--metadata is required.")
 }
 
 dir.create(opt$outdir, showWarnings = FALSE, recursive = TRUE)
 
-# --- Read data ---
-cat("Reading count matrix:", opt$counts, "\n")
-count_data <- read.delim(opt$counts, row.names = 1, check.names = FALSE)
-
+# --- Read metadata ---
 cat("Reading metadata:", opt$metadata, "\n")
 meta_data <- read.delim(opt$metadata, check.names = FALSE)
-
-# Use first column as sample IDs
 rownames(meta_data) <- meta_data[[1]]
-
-# Validate sample matching
-common_samples <- intersect(colnames(count_data), rownames(meta_data))
-if (length(common_samples) == 0) {
-  stop("No matching sample IDs between count matrix columns and metadata rows.")
-}
-cat("Matched samples:", length(common_samples), "\n")
-
-count_data <- count_data[, common_samples, drop = FALSE]
-meta_data <- meta_data[common_samples, , drop = FALSE]
-
-# Ensure condition is a factor
 meta_data$condition <- as.factor(meta_data$condition)
 
-# --- Create DGEList ---
-dge <- DGEList(counts = as.matrix(count_data), group = meta_data$condition)
+# --- Build DGEList (count matrix OR tximport path) ---
+if (counts_mode) {
+  cat("Reading count matrix:", opt$counts, "\n")
+  count_data <- read.delim(opt$counts, row.names = 1, check.names = FALSE)
 
-# Filter low-expression genes
-keep <- filterByExpr(dge, group = meta_data$condition)
-dge <- dge[keep, , keep.lib.sizes = FALSE]
-cat("Genes after filtering:", nrow(dge), "\n")
+  common_samples <- intersect(colnames(count_data), rownames(meta_data))
+  if (length(common_samples) == 0) {
+    stop("No matching sample IDs between count matrix columns and metadata rows.")
+  }
+  cat("Matched samples:", length(common_samples), "\n")
 
-# Normalize
-dge <- calcNormFactors(dge)
+  count_data <- count_data[, common_samples, drop = FALSE]
+  meta_data  <- meta_data[common_samples, , drop = FALSE]
+
+  dge <- DGEList(counts = as.matrix(count_data), group = meta_data$condition)
+
+  # Filter and normalize
+  keep <- filterByExpr(dge, group = meta_data$condition)
+  dge  <- dge[keep, , keep.lib.sizes = FALSE]
+  cat("Genes after filtering:", nrow(dge), "\n")
+  dge  <- calcNormFactors(dge)
+
+} else {
+  # tximport path: length-scaled TPM counts for edgeR
+  suppressPackageStartupMessages(library(tximport))
+
+  cat("Reading quant-dirs manifest:", opt[["quant-dirs"]], "\n")
+  quant_df <- read.delim(opt[["quant-dirs"]], header = FALSE,
+                         col.names = c("sample_id", "quant_path"),
+                         stringsAsFactors = FALSE)
+  rownames(quant_df) <- quant_df$sample_id
+
+  common_samples <- intersect(quant_df$sample_id, rownames(meta_data))
+  if (length(common_samples) == 0) {
+    stop("No matching sample IDs between quant-dirs manifest and metadata.")
+  }
+  cat("Matched samples:", length(common_samples), "\n")
+
+  quant_df  <- quant_df[common_samples, , drop = FALSE]
+  meta_data <- meta_data[common_samples, , drop = FALSE]
+
+  if (opt[["quant-type"]] == "salmon") {
+    files <- setNames(file.path(quant_df$quant_path, "quant.sf"), common_samples)
+  } else {
+    files <- setNames(file.path(quant_df$quant_path, "abundance.tsv"), common_samples)
+  }
+
+  missing_files <- files[!file.exists(files)]
+  if (length(missing_files) > 0) {
+    stop("Quant files not found:\n", paste(missing_files, collapse = "\n"))
+  }
+
+  cat("Reading tx2gene:", opt$tx2gene, "\n")
+  tx2gene <- read.delim(opt$tx2gene, header = FALSE,
+                        col.names = c("tx_id", "gene_id"),
+                        stringsAsFactors = FALSE)
+
+  cat("Running tximport (type:", opt[["quant-type"]], ")...\n")
+  # Use lengthScaledTPM for edgeR: corrects for transcript length bias
+  txi <- tximport(files,
+                  type                = opt[["quant-type"]],
+                  tx2gene             = tx2gene,
+                  countsFromAbundance = "lengthScaledTPM",
+                  ignoreTxVersion     = TRUE)
+
+  cts <- txi$counts
+  dge <- DGEList(counts = round(cts), group = meta_data$condition)
+
+  # Incorporate effective-length offset for proper normalization
+  norm_mat <- txi$length / exp(rowMeans(log(txi$length)))
+  norm_mat <- norm_mat[rownames(dge), colnames(dge)]
+  dge      <- scaleOffset(dge, log(norm_mat))
+
+  # Filter and normalize
+  keep <- filterByExpr(dge, group = meta_data$condition)
+  dge  <- dge[keep, , keep.lib.sizes = FALSE]
+  cat("Genes after filtering:", nrow(dge), "\n")
+  dge  <- calcNormFactors(dge)
+}
 
 # --- Build design matrix ---
 if ("batch" %in% colnames(meta_data)) {

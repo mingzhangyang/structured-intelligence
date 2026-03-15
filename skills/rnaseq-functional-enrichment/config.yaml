@@ -1,0 +1,12 @@
+id: rnaseq-functional-enrichment
+name: RNA-seq Functional Enrichment
+version: 0.1.0
+owner: mingzhang
+description: Gene set enrichment and over-representation analysis using clusterProfiler, gseapy, or fgsea, with GO, KEGG, and Reactome pathway databases.
+entrypoints:
+  - SKILL.md
+default_tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash

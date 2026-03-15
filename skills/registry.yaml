@@ -87,6 +87,11 @@ skills:
     version: 0.1.0
     path: skills/rnaseq-alignment-qc
     config: skills/rnaseq-alignment-qc/config.yaml
+  - id: rnaseq-functional-enrichment
+    name: RNA-seq Functional Enrichment
+    version: 0.1.0
+    path: skills/rnaseq-functional-enrichment
+    config: skills/rnaseq-functional-enrichment/config.yaml
   # --- Metagenomics ---
   - id: metagenome-host-removal
     name: Metagenome Host Removal

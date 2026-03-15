@@ -18,6 +18,7 @@ default_skills:
   - rnaseq-read-counting
   - rnaseq-differential-expression
   - rnaseq-alignment-qc
+  - rnaseq-functional-enrichment
   - metagenome-host-removal
   - metagenome-taxonomic-profiling
   - metagenome-assembly

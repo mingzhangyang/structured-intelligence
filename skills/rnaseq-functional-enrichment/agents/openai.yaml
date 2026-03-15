@@ -1,0 +1,4 @@
+interface:
+  display_name: "RNA-seq Functional Enrichment"
+  short_description: "Gene set enrichment and over-representation analysis using clusterProfiler or gseapy with GO, KEGG, and Reactome databases."
+  default_prompt: "Use $rnaseq-functional-enrichment to perform GO and pathway enrichment analysis on DE results or ranked gene lists."
