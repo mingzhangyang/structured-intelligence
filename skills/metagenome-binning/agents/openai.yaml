@@ -1,0 +1,4 @@
+interface:
+  display_name: "Metagenome Binning"
+  short_description: "Recover metagenome-assembled genomes (MAGs) from contigs using MetaBAT2, refine with DAS Tool, and assess quality with CheckM2."
+  default_prompt: "Use $metagenome-binning to recover metagenome-assembled genomes from contigs and assess their quality with CheckM2."

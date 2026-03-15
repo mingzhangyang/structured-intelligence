@@ -1,0 +1,4 @@
+interface:
+  display_name: "Genome Variant Calling"
+  short_description: "Call SNVs and indels from aligned BAMs using GATK HaplotypeCaller or DeepVariant."
+  default_prompt: "Use genome-variant-calling to call germline SNVs and indels from an aligned BAM using GATK HaplotypeCaller or DeepVariant."

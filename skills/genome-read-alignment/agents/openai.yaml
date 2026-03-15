@@ -1,0 +1,4 @@
+interface:
+  display_name: "Genome Read Alignment"
+  short_description: "Align short reads to a reference genome with BWA-MEM2, sort, index, and mark duplicates."
+  default_prompt: "Use $genome-read-alignment to align FASTQ reads to a reference genome with BWA-MEM2, sort, index, and mark duplicates."

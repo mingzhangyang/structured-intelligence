@@ -1,0 +1,12 @@
+id: genome-variant-annotation
+name: Genome Variant Annotation
+version: 0.1.0
+owner: mingzhang
+description: Annotate variants with functional effects using SnpEff or Ensembl VEP, adding gene impact, population frequencies, and clinical significance.
+entrypoints:
+  - SKILL.md
+default_tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash

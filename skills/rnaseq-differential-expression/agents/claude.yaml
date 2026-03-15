@@ -1,0 +1,4 @@
+interface:
+  display_name: "RNA-seq Differential Expression"
+  short_description: "Statistical differential expression analysis using DESeq2 or edgeR in R."
+  default_prompt: "Use rnaseq-differential-expression to perform statistical differential expression testing on RNA-seq count data with DESeq2 or edgeR."

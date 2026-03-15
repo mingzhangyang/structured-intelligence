@@ -1,0 +1,12 @@
+id: rnaseq-read-alignment
+name: RNA-seq Read Alignment
+version: 0.1.0
+owner: mingzhang
+description: Splice-aware alignment of RNA-seq reads to a reference genome using STAR or HISAT2.
+entrypoints:
+  - SKILL.md
+default_tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash

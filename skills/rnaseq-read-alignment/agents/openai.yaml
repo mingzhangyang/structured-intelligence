@@ -1,0 +1,4 @@
+interface:
+  display_name: "RNA-seq Read Alignment"
+  short_description: "Splice-aware alignment of RNA-seq reads to a reference genome using STAR or HISAT2."
+  default_prompt: "Use $rnaseq-read-alignment to align RNA-seq reads to a reference genome with splice-aware aligners STAR or HISAT2."

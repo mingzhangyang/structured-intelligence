@@ -1,0 +1,12 @@
+id: genome-variant-calling
+name: Genome Variant Calling
+version: 0.1.0
+owner: mingzhang
+description: Call SNVs and indels from aligned BAMs using GATK HaplotypeCaller or DeepVariant with optional GVCF output for joint genotyping.
+entrypoints:
+  - SKILL.md
+default_tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash

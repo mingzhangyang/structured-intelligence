@@ -1,0 +1,12 @@
+id: genome-alignment-qc
+name: Genome Alignment QC
+version: 0.1.0
+owner: mingzhang
+description: Assess alignment quality with coverage depth, mapping rates, insert size, and on-target metrics using samtools, mosdepth, and picard.
+entrypoints:
+  - SKILL.md
+default_tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash

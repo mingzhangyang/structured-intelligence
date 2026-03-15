@@ -1,0 +1,12 @@
+id: metagenome-assembly
+name: Metagenome Assembly
+version: 0.1.0
+owner: mingzhang
+description: De novo assembly of metagenomic contigs from short reads using MEGAHIT or metaSPAdes.
+entrypoints:
+  - SKILL.md
+default_tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash

@@ -1,0 +1,4 @@
+interface:
+  display_name: "NGS Read Preprocessing"
+  short_description: "Adapter trimming, quality filtering, and per-sample QC reporting with fastp."
+  default_prompt: "Use $ngs-read-preprocessing to trim adapters and filter low-quality reads from FASTQ files using fastp."

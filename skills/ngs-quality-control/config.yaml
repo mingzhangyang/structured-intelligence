@@ -1,0 +1,12 @@
+id: ngs-quality-control
+name: NGS Quality Control
+version: 0.1.0
+owner: mingzhang
+description: Raw read quality assessment with FastQC and multi-sample report aggregation with MultiQC.
+entrypoints:
+  - SKILL.md
+default_tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash

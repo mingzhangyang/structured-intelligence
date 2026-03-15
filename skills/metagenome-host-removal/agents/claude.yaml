@@ -1,0 +1,4 @@
+interface:
+  display_name: "Metagenome Host Removal"
+  short_description: "Remove host-derived reads from metagenomic samples by aligning to a host reference and extracting unmapped pairs."
+  default_prompt: "Use metagenome-host-removal to remove host-derived reads from metagenomic FASTQ files before downstream analysis."

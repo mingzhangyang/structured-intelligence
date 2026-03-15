@@ -1,0 +1,12 @@
+id: genome-read-alignment
+name: Genome Read Alignment
+version: 0.1.0
+owner: mingzhang
+description: Align short reads to a reference genome with BWA-MEM2, sort and index with samtools, and mark duplicates with picard.
+entrypoints:
+  - SKILL.md
+default_tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash

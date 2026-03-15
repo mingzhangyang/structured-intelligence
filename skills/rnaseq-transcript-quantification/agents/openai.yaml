@@ -1,0 +1,4 @@
+interface:
+  display_name: "RNA-seq Transcript Quantification"
+  short_description: "Alignment-free transcript-level quantification using Salmon or kallisto."
+  default_prompt: "Use $rnaseq-transcript-quantification to quantify transcript expression from RNA-seq reads using Salmon or kallisto."

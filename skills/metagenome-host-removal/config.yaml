@@ -1,0 +1,12 @@
+id: metagenome-host-removal
+name: Metagenome Host Removal
+version: 0.1.0
+owner: mingzhang
+description: Remove host-derived reads from metagenomic samples by aligning to a host reference genome and extracting unmapped pairs.
+entrypoints:
+  - SKILL.md
+default_tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash

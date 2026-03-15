@@ -1,0 +1,4 @@
+interface:
+  display_name: "Genome Variant Annotation"
+  short_description: "Annotate variants with functional effects, population frequencies, and clinical significance."
+  default_prompt: "Use $genome-variant-annotation to annotate variants with functional effects using SnpEff or Ensembl VEP."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Metagenome Taxonomic Profiling"
+  short_description: "Profile microbial community composition from shotgun metagenomic reads using Kraken2/Bracken or MetaPhlAn 4."
+  default_prompt: "Use metagenome-taxonomic-profiling to profile the microbial community composition of host-depleted metagenomic reads."

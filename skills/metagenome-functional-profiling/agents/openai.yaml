@@ -1,0 +1,4 @@
+interface:
+  display_name: "Metagenome Functional Profiling"
+  short_description: "Functional annotation of metagenomic data using HUMAnN 3 for pathway abundance, Prokka for gene prediction, and eggNOG-mapper for ortholog assignment."
+  default_prompt: "Use $metagenome-functional-profiling to annotate metabolic functions and pathways in metagenomic data."

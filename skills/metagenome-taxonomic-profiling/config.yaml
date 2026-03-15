@@ -1,0 +1,12 @@
+id: metagenome-taxonomic-profiling
+name: Metagenome Taxonomic Profiling
+version: 0.1.0
+owner: mingzhang
+description: Profile microbial community composition from shotgun metagenomic reads using Kraken2/Bracken or MetaPhlAn 4.
+entrypoints:
+  - SKILL.md
+default_tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash

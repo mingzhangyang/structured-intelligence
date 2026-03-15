@@ -1,0 +1,12 @@
+id: rnaseq-transcript-quantification
+name: RNA-seq Transcript Quantification
+version: 0.1.0
+owner: mingzhang
+description: Alignment-free transcript-level quantification using Salmon or kallisto for fast and accurate RNA-seq expression estimates.
+entrypoints:
+  - SKILL.md
+default_tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash

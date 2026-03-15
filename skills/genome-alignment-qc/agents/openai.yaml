@@ -1,0 +1,4 @@
+interface:
+  display_name: "Genome Alignment QC"
+  short_description: "Assess alignment quality with coverage, mapping rates, insert size, and on-target metrics."
+  default_prompt: "Use $genome-alignment-qc to assess BAM quality with coverage depth, mapping rates, insert size, and on-target metrics."

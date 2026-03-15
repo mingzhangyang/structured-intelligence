@@ -1,0 +1,4 @@
+interface:
+  display_name: "RNA-seq Read Counting"
+  short_description: "Generate gene-level read count matrices from aligned BAMs using featureCounts or HTSeq-count."
+  default_prompt: "Use $rnaseq-read-counting to generate gene-level read counts from aligned BAMs using featureCounts or HTSeq-count."

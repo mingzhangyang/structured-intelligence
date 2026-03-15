@@ -1,0 +1,4 @@
+interface:
+  display_name: "NGS Quality Control"
+  short_description: "Raw read quality assessment with FastQC and multi-sample report aggregation with MultiQC."
+  default_prompt: "Use $ngs-quality-control to assess raw FASTQ read quality with FastQC and aggregate results with MultiQC."

@@ -1,0 +1,12 @@
+id: metagenome-binning
+name: Metagenome Binning
+version: 0.1.0
+owner: mingzhang
+description: Recover metagenome-assembled genomes (MAGs) from contigs using MetaBAT2, refine with DAS Tool, and assess quality with CheckM2.
+entrypoints:
+  - SKILL.md
+default_tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash

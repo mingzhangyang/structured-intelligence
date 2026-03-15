@@ -1,0 +1,4 @@
+interface:
+  display_name: "RNA-seq Alignment QC"
+  short_description: "RNA-seq-specific alignment quality assessment using RSeQC and Qualimap."
+  default_prompt: "Use $rnaseq-alignment-qc to assess RNA-seq alignment quality including gene body coverage, strandedness, and rRNA contamination using RSeQC and Qualimap."

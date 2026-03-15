@@ -1,0 +1,12 @@
+id: genome-variant-filtering
+name: Genome Variant Filtering
+version: 0.1.0
+owner: mingzhang
+description: Filter raw variant calls using GATK VQSR, GATK hard filters, or bcftools expression-based filtering.
+entrypoints:
+  - SKILL.md
+default_tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash

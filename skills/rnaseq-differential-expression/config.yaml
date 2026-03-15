@@ -1,0 +1,12 @@
+id: rnaseq-differential-expression
+name: RNA-seq Differential Expression
+version: 0.1.0
+owner: mingzhang
+description: Statistical differential expression analysis using DESeq2 or edgeR in R, with support for count matrix or tximport input.
+entrypoints:
+  - SKILL.md
+default_tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash

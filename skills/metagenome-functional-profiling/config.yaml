@@ -1,0 +1,12 @@
+id: metagenome-functional-profiling
+name: Metagenome Functional Profiling
+version: 0.1.0
+owner: mingzhang
+description: Functional annotation of metagenomic data using HUMAnN 3 for pathway abundance, Prokka for gene prediction, and eggNOG-mapper for ortholog assignment.
+entrypoints:
+  - SKILL.md
+default_tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash

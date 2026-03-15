@@ -24,3 +24,92 @@ skills:
     version: 0.1.0
     path: skills/ncbi-eutilities-assistant
     config: skills/ncbi-eutilities-assistant/config.yaml
+  # --- NGS Shared ---
+  - id: ngs-quality-control
+    name: NGS Quality Control
+    version: 0.1.0
+    path: skills/ngs-quality-control
+    config: skills/ngs-quality-control/config.yaml
+  - id: ngs-read-preprocessing
+    name: NGS Read Preprocessing
+    version: 0.1.0
+    path: skills/ngs-read-preprocessing
+    config: skills/ngs-read-preprocessing/config.yaml
+  # --- WGS/WES Variant Calling ---
+  - id: genome-read-alignment
+    name: Genome Read Alignment
+    version: 0.1.0
+    path: skills/genome-read-alignment
+    config: skills/genome-read-alignment/config.yaml
+  - id: genome-variant-calling
+    name: Genome Variant Calling
+    version: 0.1.0
+    path: skills/genome-variant-calling
+    config: skills/genome-variant-calling/config.yaml
+  - id: genome-variant-filtering
+    name: Genome Variant Filtering
+    version: 0.1.0
+    path: skills/genome-variant-filtering
+    config: skills/genome-variant-filtering/config.yaml
+  - id: genome-variant-annotation
+    name: Genome Variant Annotation
+    version: 0.1.0
+    path: skills/genome-variant-annotation
+    config: skills/genome-variant-annotation/config.yaml
+  - id: genome-alignment-qc
+    name: Genome Alignment QC
+    version: 0.1.0
+    path: skills/genome-alignment-qc
+    config: skills/genome-alignment-qc/config.yaml
+  # --- RNA-seq ---
+  - id: rnaseq-read-alignment
+    name: RNA-seq Read Alignment
+    version: 0.1.0
+    path: skills/rnaseq-read-alignment
+    config: skills/rnaseq-read-alignment/config.yaml
+  - id: rnaseq-transcript-quantification
+    name: RNA-seq Transcript Quantification
+    version: 0.1.0
+    path: skills/rnaseq-transcript-quantification
+    config: skills/rnaseq-transcript-quantification/config.yaml
+  - id: rnaseq-read-counting
+    name: RNA-seq Read Counting
+    version: 0.1.0
+    path: skills/rnaseq-read-counting
+    config: skills/rnaseq-read-counting/config.yaml
+  - id: rnaseq-differential-expression
+    name: RNA-seq Differential Expression
+    version: 0.1.0
+    path: skills/rnaseq-differential-expression
+    config: skills/rnaseq-differential-expression/config.yaml
+  - id: rnaseq-alignment-qc
+    name: RNA-seq Alignment QC
+    version: 0.1.0
+    path: skills/rnaseq-alignment-qc
+    config: skills/rnaseq-alignment-qc/config.yaml
+  # --- Metagenomics ---
+  - id: metagenome-host-removal
+    name: Metagenome Host Removal
+    version: 0.1.0
+    path: skills/metagenome-host-removal
+    config: skills/metagenome-host-removal/config.yaml
+  - id: metagenome-taxonomic-profiling
+    name: Metagenome Taxonomic Profiling
+    version: 0.1.0
+    path: skills/metagenome-taxonomic-profiling
+    config: skills/metagenome-taxonomic-profiling/config.yaml
+  - id: metagenome-assembly
+    name: Metagenome Assembly
+    version: 0.1.0
+    path: skills/metagenome-assembly
+    config: skills/metagenome-assembly/config.yaml
+  - id: metagenome-binning
+    name: Metagenome Binning
+    version: 0.1.0
+    path: skills/metagenome-binning
+    config: skills/metagenome-binning/config.yaml
+  - id: metagenome-functional-profiling
+    name: Metagenome Functional Profiling
+    version: 0.1.0
+    path: skills/metagenome-functional-profiling
+    config: skills/metagenome-functional-profiling/config.yaml

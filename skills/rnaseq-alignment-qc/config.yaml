@@ -1,0 +1,12 @@
+id: rnaseq-alignment-qc
+name: RNA-seq Alignment QC
+version: 0.1.0
+owner: mingzhang
+description: RNA-seq-specific alignment quality assessment using RSeQC and Qualimap for gene body coverage, strandedness, and rRNA contamination.
+entrypoints:
+  - SKILL.md
+default_tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash

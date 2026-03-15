@@ -1,0 +1,12 @@
+id: rnaseq-read-counting
+name: RNA-seq Read Counting
+version: 0.1.0
+owner: mingzhang
+description: Generate gene-level read count matrices from aligned BAMs using featureCounts or HTSeq-count.
+entrypoints:
+  - SKILL.md
+default_tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash

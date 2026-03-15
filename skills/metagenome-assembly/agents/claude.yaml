@@ -1,0 +1,4 @@
+interface:
+  display_name: "Metagenome Assembly"
+  short_description: "De novo assembly of metagenomic contigs from short reads using MEGAHIT or metaSPAdes."
+  default_prompt: "Use metagenome-assembly to assemble host-depleted metagenomic reads into contigs for downstream binning and annotation."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Genome Variant Filtering"
+  short_description: "Filter raw variant calls using GATK VQSR, hard filters, or bcftools expressions."
+  default_prompt: "Use genome-variant-filtering to filter raw variant calls using GATK best-practice hard filters, VQSR, or custom bcftools expressions."

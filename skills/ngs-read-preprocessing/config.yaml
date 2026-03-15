@@ -1,0 +1,12 @@
+id: ngs-read-preprocessing
+name: NGS Read Preprocessing
+version: 0.1.0
+owner: mingzhang
+description: Adapter trimming, quality filtering, and per-sample QC reporting with fastp.
+entrypoints:
+  - SKILL.md
+default_tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
