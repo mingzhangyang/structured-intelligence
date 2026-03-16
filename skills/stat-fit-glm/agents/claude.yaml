@@ -1,0 +1,4 @@
+interface:
+  display_name: "Generalized Linear Model"
+  short_description: "Fit a GLM with Poisson, Binomial, or Gaussian family for count or non-normal outcome data."
+  default_prompt: "Use stat-fit-glm to fit a generalized linear model with the appropriate family (Poisson, Binomial, or Gaussian) for count or non-normally distributed data."

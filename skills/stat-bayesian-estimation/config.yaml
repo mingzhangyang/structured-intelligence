@@ -1,0 +1,12 @@
+id: stat-bayesian-estimation
+name: Bayesian Parameter Estimation
+version: 0.1.0
+owner: mingzhang
+description: Estimate model parameters using Bayesian inference (MCMC via Stan or PyMC), returning posterior distributions and credible intervals.
+entrypoints:
+  - SKILL.md
+default_tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash

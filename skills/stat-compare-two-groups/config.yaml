@@ -1,0 +1,12 @@
+id: stat-compare-two-groups
+name: Two-Group Statistical Comparison
+version: 0.1.0
+owner: mingzhang
+description: Compare a continuous variable between two groups with automatic selection of t-test, Welch test, or Mann-Whitney U test based on data properties.
+entrypoints:
+  - SKILL.md
+default_tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash

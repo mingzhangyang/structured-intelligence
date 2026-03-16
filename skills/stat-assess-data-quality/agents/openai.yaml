@@ -1,0 +1,4 @@
+interface:
+  display_name: "Statistical Data Quality Assessment"
+  short_description: "Assess missing values, outliers, and variance structure for each variable in a data table."
+  default_prompt: "Use $stat-assess-data-quality to produce a data quality report covering missingness, outliers, and variance structure before statistical analysis."

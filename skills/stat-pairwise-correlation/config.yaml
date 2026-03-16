@@ -1,0 +1,12 @@
+id: stat-pairwise-correlation
+name: Pairwise Correlation Analysis
+version: 0.1.0
+owner: mingzhang
+description: Compute pairwise correlations and significance tests across all numeric variables, and produce a correlation heatmap.
+entrypoints:
+  - SKILL.md
+default_tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash

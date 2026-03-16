@@ -201,3 +201,74 @@ skills:
     version: 0.1.0
     path: skills/metagenome-functional-profiling
     config: skills/metagenome-functional-profiling/config.yaml
+  # --- Statistical Analysis ---
+  - id: stat-analyze-distribution
+    name: Statistical Distribution Analysis
+    version: 0.1.0
+    path: skills/stat-analyze-distribution
+    config: skills/stat-analyze-distribution/config.yaml
+  - id: stat-assess-data-quality
+    name: Statistical Data Quality Assessment
+    version: 0.1.0
+    path: skills/stat-assess-data-quality
+    config: skills/stat-assess-data-quality/config.yaml
+  - id: stat-pairwise-correlation
+    name: Pairwise Correlation Analysis
+    version: 0.1.0
+    path: skills/stat-pairwise-correlation
+    config: skills/stat-pairwise-correlation/config.yaml
+  - id: stat-compare-two-groups
+    name: Two-Group Statistical Comparison
+    version: 0.1.0
+    path: skills/stat-compare-two-groups
+    config: skills/stat-compare-two-groups/config.yaml
+  - id: stat-compare-multiple-groups
+    name: Multiple-Group Statistical Comparison
+    version: 0.1.0
+    path: skills/stat-compare-multiple-groups
+    config: skills/stat-compare-multiple-groups/config.yaml
+  - id: stat-fit-linear-model
+    name: Linear Regression Modeling
+    version: 0.1.0
+    path: skills/stat-fit-linear-model
+    config: skills/stat-fit-linear-model/config.yaml
+  - id: stat-logistic-regression
+    name: Logistic Regression
+    version: 0.1.0
+    path: skills/stat-logistic-regression
+    config: skills/stat-logistic-regression/config.yaml
+  - id: stat-fit-glm
+    name: Generalized Linear Model
+    version: 0.1.0
+    path: skills/stat-fit-glm
+    config: skills/stat-fit-glm/config.yaml
+  - id: stat-pca
+    name: Principal Component Analysis
+    version: 0.1.0
+    path: skills/stat-pca
+    config: skills/stat-pca/config.yaml
+  - id: stat-cluster-samples
+    name: Sample Clustering
+    version: 0.1.0
+    path: skills/stat-cluster-samples
+    config: skills/stat-cluster-samples/config.yaml
+  - id: stat-nonlinear-embedding
+    name: Nonlinear Dimensionality Reduction
+    version: 0.1.0
+    path: skills/stat-nonlinear-embedding
+    config: skills/stat-nonlinear-embedding/config.yaml
+  - id: stat-bayesian-estimation
+    name: Bayesian Parameter Estimation
+    version: 0.1.0
+    path: skills/stat-bayesian-estimation
+    config: skills/stat-bayesian-estimation/config.yaml
+  - id: stat-learn-bayesian-network
+    name: Bayesian Network Learning
+    version: 0.1.0
+    path: skills/stat-learn-bayesian-network
+    config: skills/stat-learn-bayesian-network/config.yaml
+  - id: stat-survival-analysis
+    name: Survival Analysis
+    version: 0.1.0
+    path: skills/stat-survival-analysis
+    config: skills/stat-survival-analysis/config.yaml

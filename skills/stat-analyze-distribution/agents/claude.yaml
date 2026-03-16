@@ -1,0 +1,4 @@
+interface:
+  display_name: "Statistical Distribution Analysis"
+  short_description: "Characterize numeric variable distributions with summary statistics and normality tests."
+  default_prompt: "Use stat-analyze-distribution to analyze the distribution of numeric variables, run normality tests, and produce diagnostic plots."

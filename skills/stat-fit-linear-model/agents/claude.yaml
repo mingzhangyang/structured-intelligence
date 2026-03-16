@@ -1,0 +1,4 @@
+interface:
+  display_name: "Linear Regression Modeling"
+  short_description: "Fit a linear regression model, report coefficients, and generate residual diagnostic plots."
+  default_prompt: "Use stat-fit-linear-model to fit a linear regression model, report coefficients with confidence intervals, and check regression assumptions with diagnostic plots."

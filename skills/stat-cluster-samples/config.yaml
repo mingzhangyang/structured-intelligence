@@ -1,0 +1,12 @@
+id: stat-cluster-samples
+name: Sample Clustering
+version: 0.1.0
+owner: mingzhang
+description: Cluster samples or features using k-means or hierarchical clustering, evaluate cluster quality with silhouette scores, and produce a dendrogram or cluster plot.
+entrypoints:
+  - SKILL.md
+default_tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash

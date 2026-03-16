@@ -4,3 +4,8 @@ agents:
     version: 0.1.0
     path: agents/ngs-analysis-expert
     config: agents/ngs-analysis-expert/config.yaml
+  - id: statistical-analysis-expert
+    name: Statistical Analysis Expert
+    version: 0.1.0
+    path: agents/statistical-analysis-expert
+    config: agents/statistical-analysis-expert/config.yaml

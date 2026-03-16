@@ -1,0 +1,4 @@
+interface:
+  display_name: "Principal Component Analysis"
+  short_description: "Perform PCA on a numeric data matrix to visualize sample structure and identify top contributing features."
+  default_prompt: "Use $stat-pca to perform principal component analysis on a numeric data matrix, visualize sample structure, and identify the top contributing features per PC."

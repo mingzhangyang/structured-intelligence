@@ -1,0 +1,12 @@
+id: stat-survival-analysis
+name: Survival Analysis
+version: 0.1.0
+owner: mingzhang
+description: Estimate and compare survival functions using Kaplan-Meier curves and log-rank test, with optional Cox proportional hazards regression.
+entrypoints:
+  - SKILL.md
+default_tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Pairwise Correlation Analysis"
+  short_description: "Compute pairwise correlations and significance tests across numeric variables with a heatmap."
+  default_prompt: "Use $stat-pairwise-correlation to compute a pairwise correlation matrix with significance testing and produce a correlation heatmap."

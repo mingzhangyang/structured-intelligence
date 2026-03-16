@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bayesian Parameter Estimation"
+  short_description: "Estimate model parameters via MCMC, returning posterior distributions and credible intervals."
+  default_prompt: "Use stat-bayesian-estimation to estimate model parameters using Bayesian MCMC inference with PyMC or Stan, returning posterior distributions and credible intervals."

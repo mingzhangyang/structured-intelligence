@@ -1,0 +1,4 @@
+interface:
+  display_name: "Survival Analysis"
+  short_description: "Estimate Kaplan-Meier survival curves, run log-rank test, and optionally fit Cox regression."
+  default_prompt: "Use stat-survival-analysis to estimate Kaplan-Meier survival curves, compare groups with the log-rank test, and optionally fit a Cox proportional hazards model."

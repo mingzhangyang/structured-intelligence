@@ -1,0 +1,4 @@
+interface:
+  display_name: "Sample Clustering"
+  short_description: "Cluster samples or features using k-means or hierarchical clustering with silhouette evaluation."
+  default_prompt: "Use stat-cluster-samples to cluster samples or features using k-means or hierarchical clustering, evaluate cluster quality with silhouette scores, and produce a heatmap or cluster plot."

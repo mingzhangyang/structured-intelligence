@@ -1,0 +1,12 @@
+id: stat-logistic-regression
+name: Logistic Regression
+version: 0.1.0
+owner: mingzhang
+description: Fit a logistic regression model for binary outcomes, report odds ratios and model performance (AUC-ROC, confusion matrix).
+entrypoints:
+  - SKILL.md
+default_tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash

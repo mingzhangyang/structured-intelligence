@@ -1,0 +1,4 @@
+interface:
+  display_name: "Two-Group Statistical Comparison"
+  short_description: "Compare a continuous variable between two groups with automatic test selection and effect size."
+  default_prompt: "Use stat-compare-two-groups to statistically compare a continuous variable between two groups, automatically selecting t-test, Welch test, or Mann-Whitney U test."

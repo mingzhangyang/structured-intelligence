@@ -1,0 +1,4 @@
+interface:
+  display_name: "Nonlinear Dimensionality Reduction"
+  short_description: "Embed high-dimensional data into 2D using t-SNE or UMAP for exploratory visualization."
+  default_prompt: "Use stat-nonlinear-embedding to embed high-dimensional data into 2D with t-SNE or UMAP for exploratory visualization of sample or cell relationships."

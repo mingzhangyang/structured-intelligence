@@ -1,0 +1,12 @@
+id: stat-assess-data-quality
+name: Statistical Data Quality Assessment
+version: 0.1.0
+owner: mingzhang
+description: Assess data quality by reporting missing values, outliers, sample size, and variance structure for each variable in a table.
+entrypoints:
+  - SKILL.md
+default_tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash

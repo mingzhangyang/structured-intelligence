@@ -1,0 +1,12 @@
+id: stat-nonlinear-embedding
+name: Nonlinear Dimensionality Reduction
+version: 0.1.0
+owner: mingzhang
+description: Embed high-dimensional data into 2D using t-SNE or UMAP for exploratory visualization of sample or cell relationships.
+entrypoints:
+  - SKILL.md
+default_tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash

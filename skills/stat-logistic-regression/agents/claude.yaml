@@ -1,0 +1,4 @@
+interface:
+  display_name: "Logistic Regression"
+  short_description: "Fit a logistic regression model for binary outcomes with odds ratios and AUC-ROC evaluation."
+  default_prompt: "Use stat-logistic-regression to fit a logistic regression model for a binary outcome, report odds ratios, and evaluate model performance with AUC-ROC."

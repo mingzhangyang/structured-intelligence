@@ -1,0 +1,12 @@
+id: stat-compare-multiple-groups
+name: Multiple-Group Statistical Comparison
+version: 0.1.0
+owner: mingzhang
+description: Compare a continuous variable across three or more groups using one-way ANOVA or Kruskal-Wallis with post-hoc testing.
+entrypoints:
+  - SKILL.md
+default_tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash

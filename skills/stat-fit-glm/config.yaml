@@ -1,0 +1,12 @@
+id: stat-fit-glm
+name: Generalized Linear Model
+version: 0.1.0
+owner: mingzhang
+description: Fit a generalized linear model (Poisson, Binomial, or Gaussian family) for count or non-normally distributed outcome data.
+entrypoints:
+  - SKILL.md
+default_tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash

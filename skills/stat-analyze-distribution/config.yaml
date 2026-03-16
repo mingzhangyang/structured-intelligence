@@ -1,0 +1,12 @@
+id: stat-analyze-distribution
+name: Statistical Distribution Analysis
+version: 0.1.0
+owner: mingzhang
+description: Characterize the distribution of one or more numeric variables with summary statistics, normality tests, and diagnostic plots.
+entrypoints:
+  - SKILL.md
+default_tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash

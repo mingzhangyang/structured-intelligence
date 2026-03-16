@@ -1,0 +1,12 @@
+id: stat-pca
+name: Principal Component Analysis
+version: 0.1.0
+owner: mingzhang
+description: Perform PCA on a numeric data matrix to reduce dimensionality, visualize sample structure, and identify top contributing features.
+entrypoints:
+  - SKILL.md
+default_tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash

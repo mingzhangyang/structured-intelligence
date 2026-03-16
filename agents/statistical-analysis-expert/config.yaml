@@ -1,0 +1,22 @@
+id: statistical-analysis-expert
+name: Statistical Analysis Expert
+version: 0.1.0
+owner: mingzhang
+description: Expert statistical analysis agent for data characterization, hypothesis testing, regression modeling, dimensionality reduction, clustering, Bayesian inference, and survival analysis.
+entrypoints:
+  - prompts/system.md
+default_skills:
+  - stat-analyze-distribution
+  - stat-assess-data-quality
+  - stat-pairwise-correlation
+  - stat-compare-two-groups
+  - stat-compare-multiple-groups
+  - stat-fit-linear-model
+  - stat-logistic-regression
+  - stat-fit-glm
+  - stat-pca
+  - stat-cluster-samples
+  - stat-nonlinear-embedding
+  - stat-bayesian-estimation
+  - stat-learn-bayesian-network
+  - stat-survival-analysis

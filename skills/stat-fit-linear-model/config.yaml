@@ -1,0 +1,12 @@
+id: stat-fit-linear-model
+name: Linear Regression Modeling
+version: 0.1.0
+owner: mingzhang
+description: Fit a linear regression model, report coefficients and model fit, and generate residual diagnostic plots.
+entrypoints:
+  - SKILL.md
+default_tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash

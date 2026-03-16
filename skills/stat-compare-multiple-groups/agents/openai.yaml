@@ -1,0 +1,4 @@
+interface:
+  display_name: "Multiple-Group Statistical Comparison"
+  short_description: "Compare a continuous variable across three or more groups with ANOVA or Kruskal-Wallis and post-hoc tests."
+  default_prompt: "Use $stat-compare-multiple-groups to compare a continuous variable across three or more groups using one-way ANOVA or Kruskal-Wallis with post-hoc pairwise testing."

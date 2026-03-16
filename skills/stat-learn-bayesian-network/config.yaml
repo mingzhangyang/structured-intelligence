@@ -1,0 +1,12 @@
+id: stat-learn-bayesian-network
+name: Bayesian Network Learning
+version: 0.1.0
+owner: mingzhang
+description: Learn the structure and conditional probabilities of a Bayesian network from observational data for causal discovery or dependency modeling.
+entrypoints:
+  - SKILL.md
+default_tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash

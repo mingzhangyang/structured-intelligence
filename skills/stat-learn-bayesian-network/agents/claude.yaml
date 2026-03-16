@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bayesian Network Learning"
+  short_description: "Learn a Bayesian network structure and conditional probabilities from observational data."
+  default_prompt: "Use stat-learn-bayesian-network to learn a Bayesian network structure and conditional probabilities from observational data for dependency or causal discovery."
