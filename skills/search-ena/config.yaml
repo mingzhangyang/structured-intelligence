@@ -1,0 +1,14 @@
+id: search-ena
+name: Search ENA
+version: 0.1.0
+owner: mingzhang
+description: Search the EMBL-EBI European Nucleotide Archive (ENA) for sequencing studies, runs, samples, and experiments using the ENA Portal REST API.
+entrypoints:
+  - SKILL.md
+default_tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
+  - WebFetch
+  - WebSearch

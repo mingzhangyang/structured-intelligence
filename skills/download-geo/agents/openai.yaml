@@ -1,0 +1,4 @@
+interface:
+  display_name: "Download GEO"
+  short_description: "Download supplementary files, series matrices, and SRA accession lists from NCBI GEO for a given GSE series."
+  default_prompt: "Use $download-geo to download supplementary data files or series matrix files from NCBI GEO, or to retrieve the SRA accession list for raw FASTQ download."

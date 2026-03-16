@@ -1,0 +1,14 @@
+id: search-gsa
+name: Search GSA
+version: 0.1.0
+owner: mingzhang
+description: Search CNCB Genome Sequence Archive (GSA) for sequencing runs, experiments, studies, and samples deposited at the China National Center for Bioinformation.
+entrypoints:
+  - SKILL.md
+default_tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
+  - WebFetch
+  - WebSearch

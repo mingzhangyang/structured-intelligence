@@ -1,0 +1,14 @@
+id: search-sra
+name: Search SRA
+version: 0.1.0
+owner: mingzhang
+description: Search NCBI Sequence Read Archive (SRA) for sequencing runs, experiments, studies, and samples using E-utilities or the NCBI Datasets CLI.
+entrypoints:
+  - SKILL.md
+default_tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
+  - WebFetch
+  - WebSearch

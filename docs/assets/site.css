@@ -642,6 +642,144 @@ a:focus-visible {
   }
 }
 
+/* --- Subsection label --- */
+.subsection-label {
+  margin: 32px 0 14px;
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* --- Agent card --- */
+.agent-card {
+  padding: 28px 30px;
+  border-radius: var(--radius-lg);
+  background: var(--paper);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+}
+
+.agent-card::before {
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 100%;
+  height: 5px;
+  content: "";
+  background: linear-gradient(90deg, rgba(249, 115, 22, 0.92), rgba(37, 99, 235, 0.92));
+}
+
+.agent-card h3 {
+  margin-bottom: 10px;
+  font-size: 1.4rem;
+}
+
+.agent-card-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(200px, 0.5fr);
+  gap: 28px;
+  align-items: start;
+}
+
+.agent-card ul {
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.agent-card li {
+  position: relative;
+  margin-top: 10px;
+  padding-left: 18px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.agent-card li::before {
+  position: absolute;
+  left: 0;
+  top: 0.65em;
+  width: 8px;
+  height: 8px;
+  content: "";
+  border-radius: 50%;
+  background: var(--gold);
+  transform: translateY(-50%);
+}
+
+.agent-card p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.68;
+}
+
+/* --- Skill category grid --- */
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.category-card {
+  padding: 18px 20px;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.62);
+  border: 1px solid rgba(28, 43, 47, 0.1);
+  box-shadow: var(--shadow-soft);
+}
+
+.category-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.category-card h4 {
+  margin: 0;
+  font-size: 0.96rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.category-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  min-width: 26px;
+  height: 26px;
+  padding: 0 7px;
+  border-radius: 999px;
+  background: rgba(37, 99, 235, 0.1);
+  color: var(--teal);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.skill-chip-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.skill-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: rgba(28, 43, 47, 0.06);
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  line-height: 1.6;
+}
+
 @media (max-width: 980px) {
   .hero-grid,
   .repo-panel,
@@ -650,6 +788,14 @@ a:focus-visible {
   .thesis-grid,
   .workflow-frame,
   .prompt-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .category-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .agent-card-body {
     grid-template-columns: 1fr;
   }
 
@@ -818,6 +964,14 @@ a:focus-visible {
   .repo-meta div,
   .fact-chip {
     padding: 16px;
+  }
+
+  .category-card {
+    padding: 14px 16px;
+  }
+
+  .agent-card {
+    padding: 20px 18px;
   }
 
   .hero-grid {

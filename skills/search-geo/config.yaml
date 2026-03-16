@@ -1,0 +1,14 @@
+id: search-geo
+name: Search GEO
+version: 0.1.0
+owner: mingzhang
+description: Search NCBI Gene Expression Omnibus (GEO) for expression datasets, series, samples, and platforms using E-utilities or the GEO query API.
+entrypoints:
+  - SKILL.md
+default_tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
+  - WebFetch
+  - WebSearch

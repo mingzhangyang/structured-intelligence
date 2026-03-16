@@ -1,0 +1,12 @@
+id: download-sra
+name: Download SRA
+version: 0.1.0
+owner: mingzhang
+description: Download raw sequencing data from NCBI SRA as FASTQ files using prefetch and fasterq-dump, with support for single accessions, batch lists, and BioProject expansion.
+entrypoints:
+  - SKILL.md
+default_tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash

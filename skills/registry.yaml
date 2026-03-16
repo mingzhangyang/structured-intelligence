@@ -24,6 +24,48 @@ skills:
     version: 0.1.0
     path: skills/ncbi-eutilities-assistant
     config: skills/ncbi-eutilities-assistant/config.yaml
+  # --- Public Database Search ---
+  - id: search-sra
+    name: Search SRA
+    version: 0.1.0
+    path: skills/search-sra
+    config: skills/search-sra/config.yaml
+  - id: search-gsa
+    name: Search GSA
+    version: 0.1.0
+    path: skills/search-gsa
+    config: skills/search-gsa/config.yaml
+  - id: search-geo
+    name: Search GEO
+    version: 0.1.0
+    path: skills/search-geo
+    config: skills/search-geo/config.yaml
+  - id: search-ena
+    name: Search ENA
+    version: 0.1.0
+    path: skills/search-ena
+    config: skills/search-ena/config.yaml
+  - id: search-ncbi-datasets
+    name: Search NCBI Datasets
+    version: 0.1.0
+    path: skills/search-ncbi-datasets
+    config: skills/search-ncbi-datasets/config.yaml
+  # --- Data Download ---
+  - id: download-sra
+    name: Download SRA
+    version: 0.1.0
+    path: skills/download-sra
+    config: skills/download-sra/config.yaml
+  - id: download-gdc
+    name: Download GDC
+    version: 0.1.0
+    path: skills/download-gdc
+    config: skills/download-gdc/config.yaml
+  - id: download-geo
+    name: Download GEO
+    version: 0.1.0
+    path: skills/download-geo
+    config: skills/download-geo/config.yaml
   - id: bioinformatics-env-setup
     name: Bioinformatics Environment Setup
     version: 0.1.0

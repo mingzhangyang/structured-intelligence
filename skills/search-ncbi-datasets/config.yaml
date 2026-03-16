@@ -1,0 +1,14 @@
+id: search-ncbi-datasets
+name: Search NCBI Datasets
+version: 0.1.0
+owner: mingzhang
+description: Search NCBI Datasets for genome assemblies, genes, taxonomy records, and virus genomes using the NCBI Datasets CLI or REST API.
+entrypoints:
+  - SKILL.md
+default_tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
+  - WebFetch
+  - WebSearch

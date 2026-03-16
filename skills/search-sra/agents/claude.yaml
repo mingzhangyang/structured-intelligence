@@ -1,0 +1,4 @@
+interface:
+  display_name: "Search SRA"
+  short_description: "Search NCBI Sequence Read Archive for sequencing runs, experiments, and studies using E-utilities."
+  default_prompt: "Use search-sra to search the NCBI Sequence Read Archive for sequencing runs, experiments, or studies."

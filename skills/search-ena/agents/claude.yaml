@@ -1,0 +1,4 @@
+interface:
+  display_name: "Search ENA"
+  short_description: "Search the EMBL-EBI European Nucleotide Archive for sequencing studies, runs, and samples using the ENA Portal REST API."
+  default_prompt: "Use search-ena to search the European Nucleotide Archive for sequencing studies, runs, or samples and retrieve FASTQ download URLs."

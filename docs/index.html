@@ -94,6 +94,7 @@
             <span>Scientific Tooling</span>
           </a>
           <div class="topbar-links">
+            <a href="#agent">Agent</a>
             <a href="#skills">Skills</a>
             <a href="./manuscripts/">Manuscripts</a>
             <a href="#why">Why now</a>
@@ -107,9 +108,10 @@
             <h1 class="title-hero">Structured Intelligence</h1>
             <p class="lede">
               Structured Intelligence publishes reusable local AI skills and
-              manuscript-style explanations for scientific workflows such as literature
-              retrieval and conserved-domain annotation, with an emphasis on methods
-              that stay explicit, inspectable, and easy to reuse.
+              manuscript-style explanations for scientific workflows spanning literature
+              retrieval, genome variant calling, RNA-seq analysis, metagenomics, and
+              public genomics database access, with an emphasis on methods that stay
+              explicit, inspectable, and easy to reuse.
             </p>
             <div class="hero-actions">
               <a class="button button-primary" href="https://github.com/Scientific-Tooling/structured-intelligence">
@@ -121,16 +123,16 @@
             </div>
             <div class="hero-facts" aria-label="Project highlights">
               <article class="fact-chip">
-                <span class="fact-value">2</span>
+                <span class="fact-value">39</span>
+                <span class="fact-label">skills across 8 categories</span>
+              </article>
+              <article class="fact-chip">
+                <span class="fact-value">1</span>
+                <span class="fact-label">NGS orchestration agent</span>
+              </article>
+              <article class="fact-chip">
+                <span class="fact-value">3</span>
                 <span class="fact-label">scientific manuscripts</span>
-              </article>
-              <article class="fact-chip">
-                <span class="fact-value">2</span>
-                <span class="fact-label">flagship skills live now</span>
-              </article>
-              <article class="fact-chip">
-                <span class="fact-value">Local</span>
-                <span class="fact-label">inspectable research execution</span>
               </article>
             </div>
             <ul class="signal-list" aria-label="Repository promises">
@@ -152,14 +154,14 @@
                 <code>records.jsonl + brief.md + manifest.json</code>
               </article>
 
-              <article class="mini-card accent-card">
-                <p class="mini-label">Sequence annotation</p>
-                <h2>CDD domain workflow</h2>
+              <article class=”mini-card accent-card”>
+                <p class=”mini-label”>NGS pipeline</p>
+                <h2>Variant calling workflow</h2>
                 <p>
-                  “Download the minimal CDD assets, run RPS-BLAST, then explain
-                  the processed report.”
+                  “Call germline variants from these WGS paired-end FASTQs on
+                  GRCh38 and annotate with SnpEff.”
                 </p>
-                <code>asn.1 archive + rpsbproc output</code>
+                <code>aligned BAM + annotated VCF + QC report</code>
               </article>
             </div>
           </aside>
@@ -277,21 +279,169 @@
               <code>Use $ncbi-eutilities-assistant to show me the last 7 days of CRISPR progress on PubMed and write a concise update brief.</code>
             </article>
             <article class="prompt-card reveal reveal-2">
-              <p class="card-tag">Structured review prep</p>
-              <code>Use $ncbi-eutilities-assistant to run a PubMed review workflow for base editing over the last 30 days and extract structured abstracts.</code>
+              <p class="card-tag">NGS pipeline</p>
+              <code>Use $ngs-analysis-expert to run RNA-seq differential expression on 6 samples (3 treated, 3 control) and produce a DESeq2 results table with volcano plot.</code>
             </article>
             <article class="prompt-card reveal reveal-3">
-              <p class="card-tag">Conserved domain annotation</p>
-              <code>Use $rpsblast-assistant to download the minimal CDD assets, run RPS-BLAST on my FASTA, and explain the processed report.</code>
+              <p class="card-tag">Data retrieval</p>
+              <code>Use $search-sra to find all RNA-seq runs for this BioProject, then use $download-sra to fetch them as paired-end FASTQ with a manifest.</code>
             </article>
           </div>
         </section>
 
         <section class="section" id="skills">
           <div class="section-heading reveal reveal-1">
-            <p class="eyebrow">Representative Skills</p>
-            <h2>Two concrete examples of what this model looks like in practice.</h2>
+            <p class="eyebrow">Skills &amp; Agent</p>
+            <h2>39 skills across 8 categories, unified by one orchestration agent.</h2>
           </div>
+
+          <p class="subsection-label" id="agent">Orchestration Agent</p>
+          <article class="agent-card reveal reveal-1">
+            <div class="agent-card-body">
+              <div>
+                <p class="card-tag">NGS / Orchestration</p>
+                <h3>ngs-analysis-expert</h3>
+                <p>
+                  Expert bioinformatics agent that designs, orchestrates, and troubleshoots
+                  next-generation sequencing pipelines spanning whole-genome variant calling,
+                  RNA-seq differential expression, and shotgun metagenomics. Selects the
+                  correct workflow, enforces QC checkpoints, and delegates execution to
+                  registered skills rather than running raw commands.
+                </p>
+                <ul>
+                  <li>Routes any NGS request to the correct pipeline automatically based on data type and scientific question</li>
+                  <li>Validates QC gates before each step; never proceeds past a failed checkpoint without user acknowledgment</li>
+                  <li>Explains tool tradeoffs (GATK vs DeepVariant, STAR vs HISAT2, Kraken2 vs MetaPhlAn) in context</li>
+                </ul>
+                <div class="card-links">
+                  <a href="https://github.com/Scientific-Tooling/structured-intelligence/blob/main/agents/ngs-analysis-expert/AGENT.md">Open agent</a>
+                </div>
+              </div>
+              <dl class="repo-meta">
+                <div>
+                  <dt>Pipelines</dt>
+                  <dd>WGS/WES variant calling · RNA-seq DE · Shotgun metagenomics</dd>
+                </div>
+                <div>
+                  <dt>Skills delegated</dt>
+                  <dd>17 NGS skills across 4 sub-categories</dd>
+                </div>
+                <div>
+                  <dt>Core rule</dt>
+                  <dd>Always start with QC. Validate every checkpoint before advancing.</dd>
+                </div>
+              </dl>
+            </div>
+          </article>
+
+          <p class="subsection-label">All Skill Categories</p>
+          <div class="category-grid reveal reveal-2">
+            <article class="category-card">
+              <div class="category-header">
+                <h4>Core &amp; Foundation</h4>
+                <span class="category-count">6</span>
+              </div>
+              <div class="skill-chip-list">
+                <span class="skill-chip">research</span>
+                <span class="skill-chip">ncbi-eutilities-assistant</span>
+                <span class="skill-chip">rpsblast-assistant</span>
+                <span class="skill-chip">design-thermostable-mutations</span>
+                <span class="skill-chip">bioinformatics-env-setup</span>
+                <span class="skill-chip">skill-creator</span>
+              </div>
+            </article>
+            <article class="category-card">
+              <div class="category-header">
+                <h4>NGS Shared</h4>
+                <span class="category-count">2</span>
+              </div>
+              <div class="skill-chip-list">
+                <span class="skill-chip">ngs-quality-control</span>
+                <span class="skill-chip">ngs-read-preprocessing</span>
+              </div>
+            </article>
+            <article class="category-card">
+              <div class="category-header">
+                <h4>WGS/WES Variant Calling</h4>
+                <span class="category-count">5</span>
+              </div>
+              <div class="skill-chip-list">
+                <span class="skill-chip">genome-read-alignment</span>
+                <span class="skill-chip">genome-variant-calling</span>
+                <span class="skill-chip">genome-variant-filtering</span>
+                <span class="skill-chip">genome-variant-annotation</span>
+                <span class="skill-chip">genome-alignment-qc</span>
+              </div>
+            </article>
+            <article class="category-card">
+              <div class="category-header">
+                <h4>RNA-seq</h4>
+                <span class="category-count">6</span>
+              </div>
+              <div class="skill-chip-list">
+                <span class="skill-chip">rnaseq-read-alignment</span>
+                <span class="skill-chip">rnaseq-transcript-quantification</span>
+                <span class="skill-chip">rnaseq-read-counting</span>
+                <span class="skill-chip">rnaseq-differential-expression</span>
+                <span class="skill-chip">rnaseq-alignment-qc</span>
+                <span class="skill-chip">rnaseq-functional-enrichment</span>
+              </div>
+            </article>
+            <article class="category-card">
+              <div class="category-header">
+                <h4>Single-Cell RNA-seq</h4>
+                <span class="category-count">7</span>
+              </div>
+              <div class="skill-chip-list">
+                <span class="skill-chip">scrnaseq-cellranger-count</span>
+                <span class="skill-chip">scrnaseq-quality-control</span>
+                <span class="skill-chip">scrnaseq-clustering</span>
+                <span class="skill-chip">scrnaseq-cell-type-annotation</span>
+                <span class="skill-chip">scrnaseq-differential-expression</span>
+                <span class="skill-chip">scrnaseq-integration</span>
+                <span class="skill-chip">scrnaseq-trajectory-analysis</span>
+              </div>
+            </article>
+            <article class="category-card">
+              <div class="category-header">
+                <h4>Metagenomics</h4>
+                <span class="category-count">5</span>
+              </div>
+              <div class="skill-chip-list">
+                <span class="skill-chip">metagenome-host-removal</span>
+                <span class="skill-chip">metagenome-taxonomic-profiling</span>
+                <span class="skill-chip">metagenome-assembly</span>
+                <span class="skill-chip">metagenome-binning</span>
+                <span class="skill-chip">metagenome-functional-profiling</span>
+              </div>
+            </article>
+            <article class="category-card">
+              <div class="category-header">
+                <h4>Public Database Search</h4>
+                <span class="category-count">5</span>
+              </div>
+              <div class="skill-chip-list">
+                <span class="skill-chip">search-sra</span>
+                <span class="skill-chip">search-geo</span>
+                <span class="skill-chip">search-ena</span>
+                <span class="skill-chip">search-gsa</span>
+                <span class="skill-chip">search-ncbi-datasets</span>
+              </div>
+            </article>
+            <article class="category-card">
+              <div class="category-header">
+                <h4>Data Download</h4>
+                <span class="category-count">3</span>
+              </div>
+              <div class="skill-chip-list">
+                <span class="skill-chip">download-sra</span>
+                <span class="skill-chip">download-geo</span>
+                <span class="skill-chip">download-gdc</span>
+              </div>
+            </article>
+          </div>
+
+          <p class="subsection-label">Flagship Skills</p>
           <div class="card-grid">
             <article class="feature-card reveal reveal-1">
               <p class="card-tag">NCBI / Literature</p>
@@ -340,6 +490,31 @@
               <div class="card-links">
                 <a href="./manuscripts/rpsblast-assistant/">Read manuscript</a>
                 <a href="https://github.com/Scientific-Tooling/structured-intelligence/blob/main/skills/rpsblast-assistant/SKILL.md">Open skill</a>
+              </div>
+            </article>
+
+            <article class="feature-card reveal reveal-3">
+              <p class="card-tag">NGS / Orchestration</p>
+              <h3>ngs-analysis-expert</h3>
+              <p>
+                Orchestrates end-to-end genomic data workflows from archive search and
+                data download through variant calling, RNA-seq differential expression,
+                single-cell RNA-seq, and shotgun metagenomics — using 34 composable
+                skills and enforced QC checkpoints at every pipeline stage.
+              </p>
+              <ul>
+                <li>Routes requests to WGS/WES, RNA-seq, scRNA-seq, or metagenomics pipelines</li>
+                <li>Covers 5 archives (SRA, GEO, ENA, GSA, NCBI Datasets) and 3 download paths</li>
+                <li>Explains GATK vs DeepVariant, STAR vs HISAT2, Kraken2 vs MetaPhlAn tradeoffs</li>
+              </ul>
+              <div class="artifact-row">
+                <span>annotated VCF</span>
+                <span>DE results + plots</span>
+                <span>taxonomic profiles</span>
+              </div>
+              <div class="card-links">
+                <a href="./manuscripts/ngs-analysis-expert/">Read manuscript</a>
+                <a href="https://github.com/Scientific-Tooling/structured-intelligence/blob/main/agents/ngs-analysis-expert/AGENT.md">Open agent</a>
               </div>
             </article>
           </div>

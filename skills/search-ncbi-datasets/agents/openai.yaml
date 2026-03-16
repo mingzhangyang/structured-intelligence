@@ -1,0 +1,4 @@
+interface:
+  display_name: "Search NCBI Datasets"
+  short_description: "Search NCBI Datasets for genome assemblies, genes, and virus genomes using the NCBI Datasets CLI or REST API."
+  default_prompt: "Use $search-ncbi-datasets to search NCBI Datasets for genome assemblies, gene records, or virus genomes and generate download commands."

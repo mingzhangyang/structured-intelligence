@@ -1,0 +1,13 @@
+id: download-gdc
+name: Download GDC
+version: 0.1.0
+owner: mingzhang
+description: Download files from the NCI Genomic Data Commons (GDC) using the GDC Data Transfer Tool and REST API, supporting both open-access and controlled-access data.
+entrypoints:
+  - SKILL.md
+default_tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
+  - WebFetch

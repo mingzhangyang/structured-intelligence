@@ -1,0 +1,4 @@
+interface:
+  display_name: "Download GDC"
+  short_description: "Download open-access and controlled-access files from the NCI Genomic Data Commons using the GDC Data Transfer Tool."
+  default_prompt: "Use download-gdc to download files from the NCI GDC using a manifest file or file UUIDs, with optional token authentication for controlled-access data."

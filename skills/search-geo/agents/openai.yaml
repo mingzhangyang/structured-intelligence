@@ -1,0 +1,4 @@
+interface:
+  display_name: "Search GEO"
+  short_description: "Search NCBI Gene Expression Omnibus for expression datasets, series, and samples using E-utilities or the GEO query API."
+  default_prompt: "Use $search-geo to search NCBI GEO for gene expression datasets, RNA-seq series, or microarray experiments."

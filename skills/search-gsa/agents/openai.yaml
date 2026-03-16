@@ -1,0 +1,4 @@
+interface:
+  display_name: "Search GSA"
+  short_description: "Search CNCB Genome Sequence Archive for sequencing data deposited at the China National Center for Bioinformation."
+  default_prompt: "Use $search-gsa to search the CNCB Genome Sequence Archive for sequencing projects, runs, or samples."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Download SRA"
+  short_description: "Download NCBI SRA sequencing data as FASTQ files using prefetch and fasterq-dump, with batch and BioProject support."
+  default_prompt: "Use $download-sra to download FASTQ files from NCBI SRA given one or more SRR, SRP, or PRJNA accessions."

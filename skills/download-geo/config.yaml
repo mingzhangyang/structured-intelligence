@@ -1,0 +1,12 @@
+id: download-geo
+name: Download GEO
+version: 0.1.0
+owner: mingzhang
+description: Download supplementary data files, series matrices, and raw FASTQ links from NCBI GEO for a given GSE series or GSM sample accession.
+entrypoints:
+  - SKILL.md
+default_tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
