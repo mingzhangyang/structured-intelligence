@@ -18,7 +18,8 @@ Use this file when the user asks for deep justification, high-confidence decisio
   - Use at least two independent predictors before lead selection.
 
 Primary source:
-- https://pubmed.ncbi.nlm.nih.gov/40797173/
+- Zheng et al., "Assessing computational tools for predicting protein stability changes upon missense mutations using a new dataset", Protein Science, 2024
+- https://pubmed.ncbi.nlm.nih.gov/38084013/
 
 ### B) Additivity assumptions fail often for multi-mutation design
 
@@ -29,7 +30,8 @@ Primary source:
   - Avoid direct arithmetic extrapolation from single-site DDG values.
 
 Primary source:
-- https://pubmed.ncbi.nlm.nih.gov/39229177/
+- Dieckhaus et al., "Protein stability models fail to capture epistatic interactions of double point mutations", Protein Science, 2025
+- https://pubmed.ncbi.nlm.nih.gov/39704075/
 
 ### C) AF3 improves local detail in many settings, but does not remove all global limitations
 
@@ -39,7 +41,8 @@ Primary source:
   - Do not infer stability ranking from AF confidence metrics alone.
 
 Primary source:
-- https://pubmed.ncbi.nlm.nih.gov/39704075/
+- Peng et al., "A comprehensive benchmarking of the AlphaFold3 for predicting biomacromolecules and their interactions", Briefings in Bioinformatics, 2025
+- https://pubmed.ncbi.nlm.nih.gov/41313605/
 
 ### D) Thermostability pipelines should integrate temperature-aware evidence
 
@@ -49,7 +52,8 @@ Primary source:
   - Add a temperature-relevant signal (for example, delta-Tm style models when available) and report mismatch risk.
 
 Primary source:
-- https://pubmed.ncbi.nlm.nih.gov/39864358/
+- Peccati et al., "Computation of Protein Thermostability and Epistasis", WIREs Computational Molecular Science, 2025
+- https://doi.org/10.1002/wcms.70045
 
 ### E) Data quality and calibration sets are now strong enough to enforce in-workflow controls
 
@@ -58,11 +62,13 @@ Primary source:
   - Calibrate thresholds on known stabilizing/neutral/destabilizing mutations in the same scaffold family before applying fixed cutoffs.
 
 Primary source:
-- https://pubmed.ncbi.nlm.nih.gov/40665772/
+- Musil et al., "FireProtDB 2.0: large-scale manually curated database of the protein stability data", Nucleic Acids Research, 2025
+- https://pubmed.ncbi.nlm.nih.gov/41263104/
 
 ## Supplemental benchmarking context
 
-- Broad structure-model benchmark context:
-  - https://www.nature.com/articles/s43588-024-00719-w
+- Broad structure-model benchmark context (geometric learning for stability prediction):
+  - Xu et al., "Improving the prediction of protein stability changes upon mutations by geometric learning and a pre-training strategy", Nature Computational Science, 2024
+  - https://pubmed.ncbi.nlm.nih.gov/39455825/
 
 Use this as context for model quality variability, not as a direct DDG benchmark.

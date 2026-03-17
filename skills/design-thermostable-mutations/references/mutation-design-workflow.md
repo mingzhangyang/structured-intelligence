@@ -65,6 +65,8 @@ A candidate mutation should pass all:
 3. Aggregation-risk delta <= max aggregation delta (default `0`)
 4. Conservative substitution (unless explicitly overridden)
 
+Note: the `-0.3` DDG threshold is a starting default. Calibrate it against known stabilizing, neutral, and destabilizing mutations in the same scaffold family and tool before applying it as a fixed cutoff. Different tools (FoldX vs. Rosetta vs. learned predictors) have different scales and systematic offsets.
+
 ## Confidence and Escalation
 - Treat predictions as ranked hypotheses, not biochemical truth.
 - For high-stakes decisions, use orthogonal methods (FoldX/Rosetta/ML consensus).

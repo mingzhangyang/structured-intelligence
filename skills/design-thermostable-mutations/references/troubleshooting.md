@@ -7,12 +7,14 @@ Use this checklist when predictions look inconsistent or implausible.
 - Confirm every mutation notation against WT sequence identity.
 - Resolve FASTA-to-structure numbering mismatches before DDG scoring.
 - Verify chain selection and residue insertion code handling.
+- Watch for SEQRES/ATOM record discrepancies: PDB SEQRES records may include residues absent from ATOM coordinates (missing density, disordered loops), causing the ATOM-based position numbering to diverge non-trivially from the SEQRES/FASTA index. Also check for insertion codes (e.g., 100A, 100B) which shift downstream residue numbers. Use `scripts/structure_residue_mapper.py` to build the verified mapping before any scoring step.
 
 Common symptom:
 - Large DDG swings for many variants at once.
 
 Likely causes:
 - Wrong chain, off-by-one mapping, or mismatched WT residue.
+- SEQRES/ATOM mismatch or insertion codes shifting downstream numbering.
 
 ## 2) Structure Quality and Context
 

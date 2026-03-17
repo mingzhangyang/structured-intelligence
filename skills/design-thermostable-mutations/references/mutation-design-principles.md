@@ -71,6 +71,12 @@ When MSA data are available:
 - Prefer substitutions observed among homologs at moderate frequency
 - Penalize rare replacements in buried, conserved cores
 
+Representative MSA and sequence-based scoring tools:
+- EVMutation: evolutionary coupling model; scores variants by epistatic log-ratio
+- ESM-1v: protein language model; log-likelihood of variant vs. WT as a fitness/stability proxy
+- GEMME: global epistatic model; fast conservation-aware variant ranking without explicit MSA alignment
+
+Use these as pre-filters before expensive structure-based scoring, not as standalone decision tools.
 Combine conservation with structure, not as a single decision criterion.
 
 ## 7) Minimum Reporting Standard

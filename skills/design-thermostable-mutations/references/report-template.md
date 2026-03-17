@@ -33,6 +33,12 @@ Required columns:
 - `risk_class` (lead / caution / mechanistic-control)
 - `notes`
 
+Example row:
+
+| mutations | structural_context | tool_scores | consensus_rank | support_count | support_fraction | functional_risk_flag | risk_class | notes |
+|---|---|---|---|---|---|---|---|---|
+| A152V | surface loop, >12 Å from active site | FoldX: -0.8, Rosetta: -0.6 | 1 | 2 | 1.00 | none | lead | Loop-rigidifying substitution; no nearby functional residues |
+
 If site discovery was performed first, include a site-level pre-table with:
 - `seq_pos`
 - `candidate_score`

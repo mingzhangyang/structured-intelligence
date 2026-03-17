@@ -25,6 +25,26 @@ Practical guidance:
 - Good as prefiltering layers before expensive structure-based scoring
 - Should not replace structural review for top candidates
 
+Representative tools:
+- EVMutation: evolutionary coupling-based variant effect predictor
+- ESM-1v: protein language model variant log-likelihood scoring
+- GEMME: global epistatic model leveraging sequence conservation
+
+### Temperature-oriented Tm predictors
+
+Use these when thermostability (not generic fold stability) is the explicit objective.
+These complement DDG tools with direct ΔTm-scale evidence.
+
+Representative tools:
+- HoTMuSiC: structure-based ΔTm predictor; directly models melting temperature change
+- MAESTRO: energy-based stability predictor with Tm change output
+- ThermoNet: CNN-based ΔΔG/ΔTm predictor trained on experimental stability data
+
+Practical guidance:
+- Prefer at least one Tm-oriented signal alongside DDG scores when ranking for thermostability.
+- Do not substitute Tm predictors for DDG tools; use them as a second axis in consensus ranking.
+- Calibrate Tm predictor thresholds on known protein variants in the same temperature range.
+
 ## 3) AlphaFold and ColabFold Usage
 
 Use AlphaFold outputs to support structural plausibility, not to directly infer DDG.

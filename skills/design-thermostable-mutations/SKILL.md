@@ -15,6 +15,7 @@ Typical requests:
 - "Design a stability-focused mutation library without breaking active site chemistry"
 - "Rank these candidate mutations by stability evidence"
 - "Build a decision-grade shortlist for wet-lab validation"
+- "Predict the stability impact of a specific variant (e.g., a clinical or engineered substitution)"
 
 ## Decision-Grade Guardrails (Default)
 These are enforced by default unless explicitly overridden:
