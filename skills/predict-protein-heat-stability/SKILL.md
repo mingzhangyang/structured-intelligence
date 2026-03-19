@@ -143,3 +143,7 @@ From repository root:
 - Tool calibration may not transfer across distant protein families.
 - Stabilizing variants are systematically under-predicted by current DDG tools; treat stabilizing predictions as high-uncertainty until orthogonally validated.
 - All predictions require experimental validation (DSF, DSC, thermal shift assay, Tm determination).
+- Common failure cases:
+  - mutation indexing mismatches between sequence and structure numbering
+  - model-quality artifacts from low-confidence structure regions
+  - incompatible DDG sign conventions when comparing outputs across tools

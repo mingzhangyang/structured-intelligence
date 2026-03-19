@@ -4,7 +4,7 @@ A repository for production-ready AI assets that improve coding, research, and w
 
 Repository: `https://github.com/Scientific-Tooling/structured-intelligence`
 
-License: MIT, see [LICENSE](/mnt/c/Users/mingz/Codes/structured-intelligence/LICENSE)
+License: MIT, see [LICENSE](./LICENSE)
 
 ## What Lives Here
 
@@ -23,8 +23,8 @@ This repository is publicly available at `https://github.com/Scientific-Tooling/
 Relevant project-site, manuscript, and skill materials include:
 
 - `docs/index.html`
-- `docs/ncbi-eutilities-assistant-manuscript.md`
-- `docs/rpsblast-assistant-manuscript.md`
+- `docs/articles/ncbi-eutilities-assistant.md`
+- `docs/articles/rpsblast-assistant.md`
 - `manuscripts/`
 - `skills/ncbi-eutilities-assistant/`
 - `skills/rpsblast-assistant/`
@@ -219,4 +219,4 @@ The intent is to add a transparent interface layer for local AI-assisted use, no
 
 ## License
 
-This repository is distributed under the MIT License. See [LICENSE](/mnt/c/Users/mingz/Codes/structured-intelligence/LICENSE).
+This repository is distributed under the MIT License. See [LICENSE](./LICENSE).

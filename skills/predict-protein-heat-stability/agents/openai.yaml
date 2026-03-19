@@ -1,0 +1,4 @@
+interface:
+  display_name: "Protein Heat Stability Prediction"
+  short_description: "Predict protein thermal stability (Tm, thermophilicity, ΔTm) from sequence and/or structure."
+  default_prompt: "Use $predict-protein-heat-stability to assess the thermal stability of the provided protein sequence or structure."

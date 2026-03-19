@@ -264,7 +264,9 @@ done <<< "$SKILLS"
 echo ""
 if [[ $SKILL_FAILED -eq 1 ]]; then
   echo "Agent '$AGENT_ID' installed with some skill failures. See warnings above."
+  echo "Restart your tool session to ensure all assets are discovered."
+  exit 1
 else
   echo "Agent '$AGENT_ID' and all default skills installed successfully."
+  echo "Restart your tool session to ensure all assets are discovered."
 fi
-echo "Restart your tool session to ensure all assets are discovered."
