@@ -25,9 +25,11 @@ Relevant project-site, manuscript, and skill materials include:
 - `docs/index.html`
 - `docs/articles/ncbi-eutilities-assistant.md`
 - `docs/articles/rpsblast-assistant.md`
+- `docs/articles/ngs-analysis-expert.md`
 - `manuscripts/`
 - `skills/ncbi-eutilities-assistant/`
 - `skills/rpsblast-assistant/`
+- `agents/ngs-analysis-expert/`
 
 The repository also includes a lightweight project landing page at `docs/index.html` and manuscript web pages under `manuscripts/`, suitable for project-scoped GitHub Pages hosting at `https://scientifictooling.org/structured-intelligence/`.
 

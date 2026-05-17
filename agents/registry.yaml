@@ -4,8 +4,12 @@ agents:
     version: 0.1.0
     path: agents/ngs-analysis-expert
     config: agents/ngs-analysis-expert/config.yaml
+    description: Designs, executes, and troubleshoots WGS/WES, RNA-seq, scRNA-seq, and shotgun metagenomics pipelines.
+    skill_count: 26
   - id: statistical-analysis-expert
     name: Statistical Analysis Expert
     version: 0.1.0
     path: agents/statistical-analysis-expert
     config: agents/statistical-analysis-expert/config.yaml
+    description: Runs data characterization, hypothesis testing, regression, dimensionality reduction, clustering, Bayesian inference, and survival analysis.
+    skill_count: 14
